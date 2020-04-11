@@ -1,0 +1,24 @@
+{
+  'presets': [
+    '@babel/preset-env',
+    '@babel/preset-react'
+  ],
+  'plugins': [
+    'react-css-modules',
+    '@babel/plugin-proposal-class-properties',
+    ['module-resolver', {
+      'root': ['./src'],
+      'alias': {
+        '~src': './src',
+        '~dist': './dist',
+        '~assets': './assets',
+        '~root': './'
+      }
+    }],
+    ['@babel/plugin-transform-runtime',
+      {
+        "regenerator": true
+      }
+    ]
+    ]
+}
