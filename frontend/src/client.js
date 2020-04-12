@@ -7,19 +7,19 @@ import { hydrate } from 'react-dom'
 
 import App from './App'
 
-const preloadedStore = window.__PRELOADED_STATE__
-delete window.__PRELOADED_STATE__
+const preloadedStore = window.__PRELOADED_STATE__.store
+delete window.__PRELOADED_STATE__ 
 
 const client = new ApolloClient({
   cache: new InMemoryCache().restore(preloadedStore),
-  link: linkError.concat(new HttpLink({
+  link: new HttpLink({
     credentials: 'include',
-    uri: process.env.GRAPHQL_URL
-  }))
+    uri: 'http://localhost:3001/graphql'
+  })
 })
 
 const render = (App) => {
-  hydrate(
+  hydrate(  
     <ApolloProvider client={client}>
       <App />
     </ApolloProvider>,

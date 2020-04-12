@@ -17,7 +17,7 @@ const client = new ApolloClient({
   link: createHttpLink({
     credentials: 'include',
     fetch,
-    uri: process.env.GRAPHQL_URL
+    uri: 'http://localhost:3001/graphql'
   })
 })
 
