@@ -1,12 +1,16 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
+import classnames from 'classnames'
 import { geoPath, geoAlbers } from 'd3-geo'
 
 import { feature } from 'topojson-client'
 
 import italyTopology from './italyTopology.json'
-import "./ItalyMap.scss";
+import './ItalyMap.scss'
 
+// TO-DO: Move this to dashboard js
+// HEre in APP just use query and pass data to dashboard
+// Easy MPV: in the map shows total cases. When they click show all data
 class ItalyMap extends Component {
   constructor(props) {
     super(props)
@@ -25,9 +29,15 @@ class ItalyMap extends Component {
     })
   }
 
+  onClick = (region) => {
+    const { selectRegion } = this.props
+
+    selectRegion(region)
+  }
+
   render() {
     const { geographies } = this.state
-    const { width, height } = this.props
+    const { width, height, data, selectedRegion } = this.props
 
     const projection = geoAlbers()
       .center([0, 41])
@@ -42,18 +52,24 @@ class ItalyMap extends Component {
         width={width}
         height={height}
         viewBox={`0 0 ${width} ${height}`}
+        className="italyMap"
       >
         <g>
-          {geographies.map((d, i) => (
-            <path
-              key={`path-${i}`}
-              d={geoPath().projection(projection)(d)}
-              className="region"
-              fill={'#ccc'}
-              stroke="#FFFFFF"
-              strokeWidth={0.3}
-            />
-          ))}
+          {geographies.map((d, i) => {
+            const region = d.properties.NAME_1
+
+            return (
+              <path
+                data-testid={region}
+                key={`path-${i}`}
+                d={geoPath().projection(projection)(d)}
+                className={classnames('italyMap__region', {
+                  italyMap__selected: region === selectedRegion,
+                })}
+                onClick={() => this.onClick(region)}
+              />
+            )
+          })}
         </g>
       </svg>
     )
