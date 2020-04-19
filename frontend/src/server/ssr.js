@@ -30,8 +30,12 @@ export default function serverRenderer() {
     )
 
     await getDataFromTree(App)
+    console.log('----------------')
+    console.log(client.extract())
     const helmet = Helmet.renderStatic()
     const preloadedState = { store: client.extract() }
+
+    console.log(preloadedState)
 
 
     return res.send(template(app, helmet, preloadedState))

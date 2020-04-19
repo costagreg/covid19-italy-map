@@ -2,7 +2,7 @@ import React from 'react'
 import { format } from 'date-fns'
 import './DataTable.scss'
 
-export default function DataTable({ updatesDate,  regionData }) {
+export default function DataTable({ updatesDate,  regionData, selectParam }) {
   const updatesDateFormated = format(updatesDate, 'MMMM dd yyyy')
 
   return (
@@ -10,12 +10,13 @@ export default function DataTable({ updatesDate,  regionData }) {
       <div className='dataTable__header'>
         {regionData['region']}
       </div>
-      <div className='dataTable__row'>
+      {/*TO-DO: use map for below*/}
+      <div className='dataTable__row' onClick={() => selectParam('hospitalizedWithSymptoms')}>
         <div className='dataTable__col'>Hospitalized With Symptoms</div>
         <div className='dataTable__col'>{regionData['hospitalizedWithSymptoms']}</div>
       </div>
       <div className='dataTable__row'>
-        <div className='dataTable__col'>Intensive Cares</div>
+        <div className='dataTable__col' onClick={() => selectParam('intensiveCare')}>Intensive Cares</div>
         <div className='dataTable__col'>{regionData['intensiveCare']}</div>
       </div>
       <div className='dataTable__row'>

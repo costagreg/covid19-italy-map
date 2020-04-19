@@ -4,6 +4,8 @@ import { useQuery } from '@apollo/react-hooks'
 import Dashboard from './components/Dashboard'
 import './App.scss'
 
+
+const defaultRegion = 'Sicilia'
 const GET_LATEST_UPDATES = gql`
   {
     latestUpdates {
@@ -20,8 +22,11 @@ const GET_LATEST_UPDATES = gql`
         dischargedHealed,
         totalDeaths
         totalCases
-        totalTests 
       }
+    },
+    latestTrendParam(param:"totalCases", days: 30, region: "${defaultRegion}"){
+      x,
+      y
     }
   }
 `
@@ -32,5 +37,5 @@ export default function App() {
   if (loading) return 'Loading...'
   if (error) return `Error! ${error.message}`
   
-  return <Dashboard data={data.latestUpdates} />
+  return <Dashboard data={data} defaultRegion={defaultRegion} />
 }
