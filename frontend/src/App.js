@@ -20,8 +20,9 @@ const GET_LATEST_UPDATES = gql`
         totalChangePositive
         newPositive,
         dischargedHealed,
-        totalDeaths
-        totalCases
+        totalDeaths,
+        totalCases,
+        totalTests,
       }
     },
     latestTrendParam(param:"totalCases", days: 30, region: "${defaultRegion}"){

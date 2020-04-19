@@ -9,9 +9,6 @@ import { feature } from 'topojson-client'
 import italyTopology from './italyTopology.json'
 import './ItalyMap.scss'
 
-// TO-DO: Move this to dashboard js
-// HEre in APP just use query and pass data to dashboard
-// Easy MPV: in the map shows total cases. When they click show all data
 class ItalyMap extends Component {
   constructor(props) {
     super(props)
@@ -65,7 +62,7 @@ class ItalyMap extends Component {
     const geoRegion = geographies.find(
       (region) => region.properties.NAME_1 === selectedRegion
     )
-    const testCircle = projection(geoCentroid(geoRegion))
+
     return (
       <svg
         ref={this.refMap}
@@ -83,18 +80,17 @@ class ItalyMap extends Component {
                 data-testid={region}
                 key={`path-${i}`}
                 d={geoPath().projection(projection)(d)}
-                className={classnames('italyMap__region', {
-                  italyMap__selected: region === selectedRegion,
-                })}
+                className={classnames('italyMap__region')}
                 fill={interpolateReds(percentages[region])}
                 onClick={() => this.onClick(region)}
               />
             )
           })}
-        </g>
-        <g>
-          <circle cx={testCircle[0]} cy={testCircle[1]} r="10" />
-        </g>
+        {geoRegion && <path
+          d={geoPath().projection(projection)(geoRegion)}
+          className={classnames('italyMap__region', 'italyMap__selected')}
+        />}
+      </g>
       </svg>
     )
   }

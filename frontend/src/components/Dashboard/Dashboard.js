@@ -8,7 +8,7 @@ import { useQuery } from '@apollo/react-hooks'
 
 import './Dashboard.scss'
 
-const FETCH_LATEST_TRENT = (region, param) => gql`
+const FETCH_LATEST_TREND = (region, param) => gql`
   {
     latestTrendParam(param:"${param}", days: 30, region: "${region}"){
       x,
@@ -46,12 +46,13 @@ export default function Dashboard({
             updatesDate={+date}
             regionData={selectedRegionData}
             selectParam={selectParam}
+            selectedParam={selectedParam}
           />
         )}
-        <Query query={FETCH_LATEST_TRENT(selectedRegion, selectedParam)}>
+        <Query query={FETCH_LATEST_TREND(selectedRegion, selectedParam)}>
           {({ loading, error, data }) => {
-            if (loading) return <div>Fetching</div>
-            if (error) return <div>Error</div>
+            if (loading) return <div></div>
+            if (error) return <div></div>
 
             const { latestTrendParam } = data
 

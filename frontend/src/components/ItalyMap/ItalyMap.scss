@@ -2,16 +2,14 @@
   &__region{
     // fill:#ccc;
     stroke:#ccc;
-    stroke-width: 1
+    stroke-width: 1;
+    cursor: pointer;
   }
   &__selected{
     // fill:#dedede;
-  }
-
-  circle{
-    fill: white;
-    stroke:#ccc;
-    stroke-width: 1;
+    fill:transparent;
+    stroke:black;
+    stroke-width: 1.5;
   }
 
 }
