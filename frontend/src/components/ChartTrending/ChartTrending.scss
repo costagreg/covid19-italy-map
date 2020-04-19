@@ -1,0 +1,20 @@
+.chartTrending{
+  &__xAxis{
+    stroke:#000;
+  }
+  &__line{
+    stroke: steelblue;
+    stroke-width: 2px;
+    fill: none;
+  }
+  &__xTicksText{
+    font-size: 12px;
+    transform:translate(0,15px)
+  }
+
+  &__xTicksLine{
+    stroke:#000;
+    transform:translate(0,0)
+  }
+
+}
