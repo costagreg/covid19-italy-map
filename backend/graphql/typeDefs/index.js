@@ -2,10 +2,10 @@ import { gql } from 'apollo-server-express'
 
 export default gql`
  type Query {
-   latestUpdates: response,
+   latestUpdates: latestUpdates,
  }
 
- type response {
+ type latestUpdates {
     date: String!,
     regions: [updateRegion!]
  }

@@ -1,11 +1,17 @@
 .italyMap{
   &__region{
-    fill:#ccc;
-    stroke:#FFFFFF;
+    // fill:#ccc;
+    stroke:#ccc;
     stroke-width: 1
   }
   &__selected{
-    fill:#dedede;
+    // fill:#dedede;
+  }
+
+  circle{
+    fill: white;
+    stroke:#ccc;
+    stroke-width: 1;
   }
 
 }

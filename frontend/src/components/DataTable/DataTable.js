@@ -1,8 +1,10 @@
 import React from 'react'
+import { format } from 'date-fns'
 import './DataTable.scss'
 
-export default function DataTable({ regionData }) {
-  
+export default function DataTable({ updatesDate,  regionData }) {
+  const updatesDateFormated = format(updatesDate, 'MMMM dd yyyy')
+
   return (
     <div data-testid={`dataTable-${regionData['region']}`} className='dataTable'>
       <div className='dataTable__header'>
@@ -52,6 +54,7 @@ export default function DataTable({ regionData }) {
         <div className='dataTable__col'>Total Tests</div>
         <div className='dataTable__col'>{regionData['totalTests']}</div>
       </div>
+      <div className='dataTable__rowDate'>The data above are update on {updatesDateFormated}</div>
     </div>
   )
 }

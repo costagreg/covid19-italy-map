@@ -31,8 +31,6 @@ export default function App() {
 
   if (loading) return 'Loading...'
   if (error) return `Error! ${error.message}`
-
-  console.log(data.latestUpdates)
   
   return <Dashboard data={data.latestUpdates} />
 }

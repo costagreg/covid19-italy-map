@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import { geoPath, geoAlbers } from 'd3-geo'
+import { geoPath, geoAlbers, geoCentroid } from 'd3-geo'
+import { interpolateReds } from 'd3-scale-chromatic'
 
 import { feature } from 'topojson-client'
 
@@ -35,6 +36,19 @@ class ItalyMap extends Component {
     selectRegion(region)
   }
 
+  calcPercentage = (field) => {
+    const { data } = this.props
+    const sum = data.reduce((tot, regionData) => tot + regionData[field], 0)
+
+    const percentages = data.reduce((obj, regionData) => {
+      obj[regionData['region']] = regionData[field] / sum
+
+      return obj
+    }, {})
+
+    return percentages
+  }
+
   render() {
     const { geographies } = this.state
     const { width, height, data, selectedRegion } = this.props
@@ -46,6 +60,12 @@ class ItalyMap extends Component {
       .scale(4000)
       .translate([width / 2, height / 1.8])
 
+    const percentages = this.calcPercentage('totalCases')
+
+    const geoRegion = geographies.find(
+      (region) => region.properties.NAME_1 === selectedRegion
+    )
+    const testCircle = projection(geoCentroid(geoRegion))
     return (
       <svg
         ref={this.refMap}
@@ -66,10 +86,14 @@ class ItalyMap extends Component {
                 className={classnames('italyMap__region', {
                   italyMap__selected: region === selectedRegion,
                 })}
+                fill={interpolateReds(percentages[region])}
                 onClick={() => this.onClick(region)}
               />
             )
           })}
+        </g>
+        <g>
+          <circle cx={testCircle[0]} cy={testCircle[1]} r="10" />
         </g>
       </svg>
     )

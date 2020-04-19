@@ -1,3 +1,16 @@
 .dashboard{
   display: flex;
+
+  &__italyMap{
+    flex: 50%;
+  }
+  &__dataTable{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    flex: 50%;
+  }
+  &__dataPicker{
+    flex: 100px;
+  }
 }

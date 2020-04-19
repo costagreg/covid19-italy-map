@@ -7,7 +7,17 @@
     box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
     margin: 10px 0;
   }
+  &__rowDate{
+    text-align: center;
+    font-size: 0.8rem;
+    font-style: oblique;
+  }
   &__col{
     padding: 5px 10px;
+    flex:25%;
+
+    &:first-child{
+      flex: 75%;
+    }
   }
 }

@@ -30,5 +30,8 @@ const render = (App) => {
 render(App)
 
 if (module.hot) {
-  module.hot.accept()
+  module.hot.accept('./App.js', () => {
+    const NextApp = require('./App').default;
+    render(NextApp)
+  })
 }
