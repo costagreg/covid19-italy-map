@@ -11,5 +11,9 @@
     stroke:black;
     stroke-width: 1.5;
   }
-
+  &__tooltip{
+    text-align: center;
+    font-size: 10px;
+    background-color: white;
+  }
 }

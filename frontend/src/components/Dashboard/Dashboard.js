@@ -60,9 +60,10 @@ export default function Dashboard({
               <ChartTrending
                 xAxis={latestTrendParam.x}
                 yAxis={latestTrendParam.y}
+                selectedParam={selectedParam} 
                 chartWidth={400}
                 chartHeight={200}
-                marginBottom={30}
+                margin={[10,20,30,20]}
               />
             )
           }}

@@ -10,14 +10,8 @@ import italyTopology from './italyTopology.json'
 import './ItalyMap.scss'
 
 class ItalyMap extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      geographies: [],
-    }
-
-    this.refMap = React.createRef()
+  state = {
+    geographies: [],
   }
 
   componentDidMount() {
@@ -47,7 +41,7 @@ class ItalyMap extends Component {
   }
 
   render() {
-    const { geographies } = this.state
+    const { geographies, hoveredRegion, tooltipX, tooltipY } = this.state
     const { width, height, data, selectedRegion } = this.props
 
     const projection = geoAlbers()
@@ -59,26 +53,26 @@ class ItalyMap extends Component {
 
     const percentages = this.calcPercentage('totalCases')
 
-    const geoRegion = geographies.find(
+    const geoSelectedRegion = geographies.find(
       (region) => region.properties.NAME_1 === selectedRegion
     )
 
     return (
       <svg
-        ref={this.refMap}
         width={width}
         height={height}
         viewBox={`0 0 ${width} ${height}`}
         className="italyMap"
       >
         <g>
+          <rect x="0" y="0" width={width} height={height}  onMouseOver={this.onMouseOut} fill="#fff" />
           {geographies.map((d, i) => {
             const region = d.properties.NAME_1
 
             return (
               <path
                 data-testid={region}
-                key={`path-${i}`}
+                key={region}
                 d={geoPath().projection(projection)(d)}
                 className={classnames('italyMap__region')}
                 fill={interpolateReds(percentages[region])}
@@ -86,11 +80,13 @@ class ItalyMap extends Component {
               />
             )
           })}
-        {geoRegion && <path
-          d={geoPath().projection(projection)(geoRegion)}
-          className={classnames('italyMap__region', 'italyMap__selected')}
-        />}
-      </g>
+          {geoSelectedRegion && (
+            <path
+              d={geoPath().projection(projection)(geoSelectedRegion)}
+              className={classnames('italyMap__region', 'italyMap__selected')}
+            />
+          )}
+        </g>
       </svg>
     )
   }

@@ -1,6 +1,8 @@
 .dataTable{
   &__header{
     text-align: center;
+    padding: 20px 0;
+    font-size: 1.4rem;
   }
   &__row{
     display: flex;
