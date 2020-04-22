@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component, Fragment, useRef, useEffect } from 'react'
 import classnames from 'classnames'
 import { scaleBand, scaleLinear, scale } from 'd3-scale'
 import { range, max, min } from 'd3-array'
@@ -6,20 +6,35 @@ import { line, curveCatmullRom } from 'd3-shape'
 import { format } from 'date-fns'
 import './ChartTrending.scss'
 
-const ToolTip = ({ xPos, yPos, xValue, yValue, label }) => (
-  <foreignObject x={xPos} y={yPos} width="40%" height={1}>
-    <div className="toolTip">
-      <div className="toolTip__yValue">
-        <b>{label}</b>: {yValue}
+const ToolTip = ({
+  xPos,
+  yPos,
+  xValue,
+  yValue,
+  label,
+  chartWidth,
+  chartHeight,
+}) => {
+ 
+
+  xPos = xPos + 200 < chartWidth ? xPos + 10 : chartWidth  - 220
+  yPos = yPos + 100 < chartHeight ? yPos + 10 : chartHeight + 20 - 120
+
+  return (
+    <foreignObject x={xPos} y={yPos} width="200" height={100}>
+      <div className="toolTip">
+        <div className="toolTip__yValue">
+          <b>{label}</b>: {yValue}
+        </div>
+        <div className="toolTip__xValue">{xValue}</div>
       </div>
-      <div className="toolTip__xValue">{xValue}</div>
-    </div>
-  </foreignObject>
-)
+    </foreignObject>
+  )
+}
 
 export default class ChartTrending extends Component {
   state = {
-    pointHovered: null,
+    pointHovered: -1,
   }
   render() {
     const { pointHovered } = this.state
@@ -102,25 +117,25 @@ export default class ChartTrending extends Component {
                   r={10}
                   fill="transparent"
                   onMouseOver={() => {
-                    console.log(i)
                     this.setState({ pointHovered: i })
                   }}
                   onMouseOut={() => {
-                    console.log('out', i)
-                    this.setState({ pointHovered: null })
+                    this.setState({ pointHovered: -1 })
                   }}
                 />
               </Fragment>
             ))}
           </g>
           {xTicks}
-          {pointHovered ? (
+          {pointHovered >= 0 ? (
             <ToolTip
               xPos={xAxisScale(pointHovered)}
               yPos={yAxisScale(yAxis[pointHovered])}
               xValue={format(new Date(+xAxis[pointHovered]), 'dd/MM/yy')}
               yValue={yAxis[pointHovered]}
               label={selectedParam}
+              chartWidth={chartWidth}
+              chartHeight={chartHeight}
             />
           ) : null}
         </svg>
