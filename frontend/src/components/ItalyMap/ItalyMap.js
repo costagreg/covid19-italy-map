@@ -10,7 +10,7 @@ import italyTopology from './italyTopology.json'
 import './ItalyMap.scss'
 
 const Region = memo(
-  ({ projection, region, percentages, geoboundaries, isSelected, onClick }) => (
+  ({ projection, region, percentages, geoboundaries, isSelected, onClick = () => {} }) => (
     <path
       data-testid={region}
       d={geoPath().projection(projection)(geoboundaries)}
@@ -39,12 +39,12 @@ const calcPercentage = (field, data) => {
 }
 
 function ItalyMap({ width, height, data, selectRegion, selectedRegion }) {
-  const projection = geoAlbers()
+  const projection = useMemo(() => geoAlbers()
     .center([0, 41])
     .rotate([347, 0])
     .parallels([35, 45])
     .scale(4000)
-    .translate([width / 2, height / 1.8])
+    .translate([width / 2, height / 1.8]), [width, height])
 
   const percentages = useMemo(() => calcPercentage('totalCases', data), [data])
 
@@ -84,9 +84,6 @@ function ItalyMap({ width, height, data, selectRegion, selectedRegion }) {
             projection={projection}
             region={selectedRegion}
             percentages={percentages}
-            onClick={() => {
-              selectRegion(region)
-            }}
             isSelected
           />
         )}
