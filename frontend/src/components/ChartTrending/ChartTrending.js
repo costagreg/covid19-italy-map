@@ -1,12 +1,14 @@
 import React, { Component, Fragment, useRef, useEffect } from 'react'
 import classnames from 'classnames'
+import PropTypes from 'prop-types'
+
 import { scaleBand, scaleLinear, scale } from 'd3-scale'
 import { range, max, min } from 'd3-array'
 import { line, curveCatmullRom } from 'd3-shape'
 import { format } from 'date-fns'
 import './ChartTrending.scss'
 
-const ToolTip = ({
+export const ToolTip = ({
   xPos,
   yPos,
   xValue,
@@ -14,17 +16,19 @@ const ToolTip = ({
   label,
   chartWidth,
   chartHeight,
+  toolTipWidth,
+  toolTipHeight,
 }) => {
- 
 
-  xPos = xPos + 200 < chartWidth ? xPos + 10 : chartWidth  - 220
-  yPos = yPos + 100 < chartHeight ? yPos + 10 : chartHeight + 20 - 120
+  xPos = xPos + toolTipWidth < chartWidth ? xPos + 10 : chartWidth - (toolTipWidth + 20)
+  yPos = yPos + toolTipHeight < chartHeight ? yPos + 10 : chartHeight - (toolTipHeight + 20)
 
   return (
-    <foreignObject x={xPos} y={yPos} width="200" height={100}>
+    <foreignObject data-testid='toolTip' x={xPos} y={yPos} width="200" height={100}>
       <div className="toolTip">
         <div className="toolTip__yValue">
-          <b>{label}</b>: {yValue}
+          <b className="toolTip__yValueLabel">{label}</b>:
+          <span className="toolTip__yValueText">{yValue}</span>
         </div>
         <div className="toolTip__xValue">{xValue}</div>
       </div>
@@ -43,8 +47,8 @@ export default class ChartTrending extends Component {
       yAxis,
       chartWidth,
       chartHeight,
-      margin = [0, 0, 0, 0],
-      selectedParam,
+      margin,
+      yLabel,
     } = this.props
 
     const [marginTop, marginRight, marginBottom, marginLeft] = margin
@@ -83,7 +87,7 @@ export default class ChartTrending extends Component {
     )
 
     return (
-      <div className="chartTrending">
+      <div data-testid="chartTrending" className="chartTrending">
         <svg
           width={chartWidth}
           height={chartHeight}
@@ -101,19 +105,16 @@ export default class ChartTrending extends Component {
           <g>
             <path className="chartTrending__line" d={chartLine(yAxis)} />
             {yAxis.map((d, i) => (
-              <Fragment>
+              <g transform={`translate(${xAxisScale(i)},${yAxisScale(d)})`}>
                 <circle
                   className={classnames([
                     'chartTrending__circle',
                     { chartTrending__circleSelected: i === pointHovered },
                   ])}
-                  cx={xAxisScale(i)}
-                  cy={yAxisScale(d)}
                   r={2}
                 />
                 <circle
-                  cx={xAxisScale(i)}
-                  cy={yAxisScale(d)}
+                  data-testid="dataPoint"
                   r={10}
                   fill="transparent"
                   onMouseOver={() => {
@@ -123,7 +124,7 @@ export default class ChartTrending extends Component {
                     this.setState({ pointHovered: -1 })
                   }}
                 />
-              </Fragment>
+              </g>
             ))}
           </g>
           {xTicks}
@@ -133,9 +134,11 @@ export default class ChartTrending extends Component {
               yPos={yAxisScale(yAxis[pointHovered])}
               xValue={format(new Date(+xAxis[pointHovered]), 'dd/MM/yy')}
               yValue={yAxis[pointHovered]}
-              label={selectedParam}
+              label={yLabel}
               chartWidth={chartWidth}
               chartHeight={chartHeight}
+              toolTipWidth={200}
+              toolTipHeight={100}
             />
           ) : null}
         </svg>
@@ -144,7 +147,18 @@ export default class ChartTrending extends Component {
   }
 }
 
+ChartTrending.protoTypes = {
+  xAxis: PropTypes.arrayOf(PropTypes.number).isRequired,
+  yAxis: PropTypes.arrayOf(
+    PropTypes.oneOf([PropTypes.string, PropTypes.number])
+  ).isRequired,
+  chartWidth: PropTypes.number.isRequired,
+  chartHeight: PropTypes.number.isRequired,
+  margin: PropTypes.arrayOf(PropTypes.number),
+  yLabel: PropTypes.arrayOf(PropTypes.string),
+}
+
 ChartTrending.defaultProps = {
-  xAxis: [],
-  yAxis: [],
+  margin: [0,0,0,0],
+  yLabel: '',
 }

@@ -6,10 +6,11 @@ import DataTable from '../../components/DataTable'
 import ChartTrending from '../../components/ChartTrending'
 import { useQuery } from '@apollo/react-hooks'
 
+import { params } from '../../constants'
 import './Dashboard.scss'
 
 export const FETCH_LATEST_TREND = gql`
-query latestTrendParam($param: String!, $region: String!) {
+  query latestTrendParam($param: String!, $region: String!) {
     latestTrendParam(param: $param, days: 30, region: $region) {
       x
       y
@@ -47,8 +48,8 @@ export function Dashboard() {
   return (
     <Query query={GET_LATEST_UPDATES}>
       {({ loading, error, data }) => {
-        if (loading) return <div></div>
-        if (error) return <div></div>
+        if (loading) return <div>Loading</div>
+        if (error) return <div>Ops</div>
 
         const { latestUpdates } = data
         const { date, regions } = latestUpdates
@@ -91,7 +92,7 @@ export function Dashboard() {
                     <ChartTrending
                       xAxis={latestTrendParam.x}
                       yAxis={latestTrendParam.y}
-                      selectedParam={selectedParam}
+                      yLabel={selectedParam}
                       chartWidth={400}
                       chartHeight={200}
                       margin={[10, 20, 30, 20]}

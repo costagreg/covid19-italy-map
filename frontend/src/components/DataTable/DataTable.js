@@ -2,55 +2,8 @@ import React from 'react'
 import { format } from 'date-fns'
 import classnames from 'classnames'
 
+import { params } from '../../constants'
 import './DataTable.scss'
-
-const params = [
-  {
-    name: 'hospitalizedWithSymptoms',
-    label: 'Hospitalized With Symptoms',
-  },
-  {
-    name: 'intensiveCare',
-    label: 'Intensive Cares',
-  },
-  {
-    name: 'totalHospitalized',
-    label: 'Total Hospitalized',
-  },
-  {
-    name: 'homeIsolation',
-    label: 'Home Isolation',
-  },
-
-  {
-    name: 'totalPositive',
-    label: 'Total Positive',
-  },
-  {
-    name: 'totalChangePositive',
-    label: 'Total Change Positive',
-  },
-  {
-    name: 'newPositive',
-    label: 'New Positive',
-  },
-  {
-    name: 'dischargedHealed',
-    label: 'Discharged Healed',
-  },
-  {
-    name: 'totalDeaths',
-    label: 'Total Deaths',
-  },
-  {
-    name: 'totalCases',
-    label: 'Total Cases',
-  },
-  {
-    name: 'totalTests',
-    label: 'Total Tests',
-  },
-]
 
 export default function DataTable({
   updatesDate,

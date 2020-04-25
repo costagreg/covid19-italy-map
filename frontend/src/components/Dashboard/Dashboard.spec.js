@@ -104,14 +104,16 @@ describe('Dashboard', () => {
       expect(asFragment()).toMatchSnapshot()
     })
 
-    it('shows Sicilia as default selected region', () => {
+    it('shows Sicilia as default selected region', async () => {
       const { queryByTestId } = render(
         <MockedProvider mocks={mocks}>
           <Dashboard />
         </MockedProvider>
       )
+      await wait(0)
 
       expect(queryByTestId('dataTable-Sicilia')).toBeDefined()
+      expect(queryByTestId('chartTrending')).toBeDefined()
     })
 
     it('doesnt show any data if region is not present in the data', async () => {
