@@ -21,6 +21,7 @@ export default function DataTable({
       <div className="dataTable__header">{regionData['region']}</div>
       {params.map(({ name, label }) => (
         <div
+          key={name}
           role="button"
           className={classnames('dataTable__row', {
             dataTable__rowSelected: selectedParam === name,
@@ -33,7 +34,7 @@ export default function DataTable({
       ))}
 
       <div className="dataTable__rowDate">
-        The data above are update on {updatesDateFormated}
+        The data above are updated on {updatesDateFormated}
       </div>
     </div>
   )

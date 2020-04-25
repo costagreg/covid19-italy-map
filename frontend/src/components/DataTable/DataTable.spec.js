@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react'
+import { render, fireEvent} from '@testing-library/react'
 import React from 'react'
 import DataTable from './DataTable'
 
@@ -17,6 +17,9 @@ const initProps = {
     totalCases: 2232,
     totalTests: 28742,
   },
+  selectParam: () => {},
+  selectedParam: 'totalCases',
+  updatesDate: 1586448000000,
 }
 
 describe('DataTable', () => {
@@ -26,5 +29,18 @@ describe('DataTable', () => {
 
       expect(asFragment()).toMatchSnapshot()
     })
+  })
+
+  describe('@event', () => {
+    it('renders the DataTable without any error', () => {
+      const selectParam = jest.fn()
+      const { getAllByRole } = render(<DataTable {...initProps} selectParam={selectParam} />)
+
+      const dataRows = getAllByRole('button')
+
+      fireEvent.click(dataRows[0])
+
+      expect(selectParam).toHaveBeenCalled()
+    }) 
   })
 })

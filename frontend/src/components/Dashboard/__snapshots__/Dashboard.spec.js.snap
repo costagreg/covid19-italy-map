@@ -318,7 +318,7 @@ exports[`Dashboard @render renders the Dashboard without any error 1`] = `
         <div
           class="dataTable__rowDate"
         >
-          The data above are update on April 09 2020
+          The data above are updated on April 09 2020
         </div>
       </div>
       <div />
