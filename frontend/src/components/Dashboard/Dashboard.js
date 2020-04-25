@@ -4,6 +4,7 @@ import gql from 'graphql-tag'
 import ItalyMap from '../../components/ItalyMap'
 import DataTable from '../../components/DataTable'
 import ChartTrending from '../../components/ChartTrending'
+import Loader from '../../components/Loader'
 import { useQuery } from '@apollo/react-hooks'
 
 import { params } from '../../constants'
@@ -48,8 +49,8 @@ export function Dashboard() {
   return (
     <Query query={GET_LATEST_UPDATES}>
       {({ loading, error, data }) => {
-        if (loading) return <div>Loading</div>
-        if (error) return <div>Ops</div>
+        if (loading) return <Loader />
+        if (error) return <div>Ops something went wrong</div>
 
         const { latestUpdates } = data
         const { date, regions } = latestUpdates
@@ -78,28 +79,30 @@ export function Dashboard() {
                   selectedParam={selectedParam}
                 />
               )}
-              <Query
-                query={FETCH_LATEST_TREND}
-                variables={{ region: selectedRegion, param: selectedParam }}
-              >
-                {({ loading, error, data }) => {
-                  if (loading) return <div></div>
-                  if (error) return <div></div>
+              <section className="dashboard__chartTrending">
+                <Query
+                  query={FETCH_LATEST_TREND}
+                  variables={{ region: selectedRegion, param: selectedParam }}
+                >
+                  {({ loading, error, data }) => {
+                    if (loading) return <Loader />
+                    if (error) return <div>Ops something went wrong</div>
 
-                  const { latestTrendParam } = data
+                    const { latestTrendParam } = data
 
-                  return (
-                    <ChartTrending
-                      xAxis={latestTrendParam.x}
-                      yAxis={latestTrendParam.y}
-                      yLabel={selectedParam}
-                      chartWidth={400}
-                      chartHeight={200}
-                      margin={[10, 20, 30, 20]}
-                    />
-                  )
-                }}
-              </Query>
+                    return (
+                      <ChartTrending
+                        xAxis={latestTrendParam.x}
+                        yAxis={latestTrendParam.y}
+                        yLabel={selectedParam}
+                        chartWidth={400}
+                        chartHeight={200}
+                        margin={[10, 20, 30, 20]}
+                      />
+                    )
+                  }}
+                </Query>
+              </section>
             </section>
           </main>
         )

@@ -10,7 +10,8 @@
     align-items: center;
     flex: 50%;
   }
-  &__dataPicker{
-    flex: 100px;
+  &__chartTrending{
+    position: relative;
+    padding: 20px 0;
   }
 }

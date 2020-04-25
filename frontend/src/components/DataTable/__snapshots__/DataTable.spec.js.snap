@@ -1,0 +1,186 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DataTable @render renders the DataTable without any error 1`] = `
+<DocumentFragment>
+  <div
+    class="dataTable"
+    data-testid="dataTable-Sicilia"
+  >
+    <div
+      class="dataTable__header"
+    >
+      Sicilia
+    </div>
+    <div
+      class="dataTable__row"
+      role="button"
+    >
+      <div
+        class="dataTable__col"
+      >
+        Hospitalized With Symptoms
+      </div>
+      <div
+        class="dataTable__col"
+      >
+        566
+      </div>
+    </div>
+    <div
+      class="dataTable__row"
+      role="button"
+    >
+      <div
+        class="dataTable__col"
+      >
+        Intensive Cares
+      </div>
+      <div
+        class="dataTable__col"
+      >
+        63
+      </div>
+    </div>
+    <div
+      class="dataTable__row"
+      role="button"
+    >
+      <div
+        class="dataTable__col"
+      >
+        Total Hospitalized
+      </div>
+      <div
+        class="dataTable__col"
+      >
+        629
+      </div>
+    </div>
+    <div
+      class="dataTable__row"
+      role="button"
+    >
+      <div
+        class="dataTable__col"
+      >
+        Home Isolation
+      </div>
+      <div
+        class="dataTable__col"
+      >
+        1313
+      </div>
+    </div>
+    <div
+      class="dataTable__row"
+      role="button"
+    >
+      <div
+        class="dataTable__col"
+      >
+        Total Positive
+      </div>
+      <div
+        class="dataTable__col"
+      >
+        1942
+      </div>
+    </div>
+    <div
+      class="dataTable__row"
+      role="button"
+    >
+      <div
+        class="dataTable__col"
+      >
+        Total Change Positive
+      </div>
+      <div
+        class="dataTable__col"
+      >
+        49
+      </div>
+    </div>
+    <div
+      class="dataTable__row"
+      role="button"
+    >
+      <div
+        class="dataTable__col"
+      >
+        New Positive
+      </div>
+      <div
+        class="dataTable__col"
+      >
+        73
+      </div>
+    </div>
+    <div
+      class="dataTable__row"
+      role="button"
+    >
+      <div
+        class="dataTable__col"
+      >
+        Discharged Healed
+      </div>
+      <div
+        class="dataTable__col"
+      >
+        152
+      </div>
+    </div>
+    <div
+      class="dataTable__row"
+      role="button"
+    >
+      <div
+        class="dataTable__col"
+      >
+        Total Deaths
+      </div>
+      <div
+        class="dataTable__col"
+      >
+        138
+      </div>
+    </div>
+    <div
+      class="dataTable__row dataTable__rowSelected"
+      role="button"
+    >
+      <div
+        class="dataTable__col"
+      >
+        Total Cases
+      </div>
+      <div
+        class="dataTable__col"
+      >
+        2232
+      </div>
+    </div>
+    <div
+      class="dataTable__row"
+      role="button"
+    >
+      <div
+        class="dataTable__col"
+      >
+        Total Tests
+      </div>
+      <div
+        class="dataTable__col"
+      >
+        28742
+      </div>
+    </div>
+    <div
+      class="dataTable__rowDate"
+    >
+      The data above are updated on April 09 2020
+    </div>
+  </div>
+</DocumentFragment>
+`;
