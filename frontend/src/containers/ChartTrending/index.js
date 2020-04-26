@@ -1,0 +1,1 @@
+export { ChartTrending as default } from './ChartTrending'

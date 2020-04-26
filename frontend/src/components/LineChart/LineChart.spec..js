@@ -1,8 +1,8 @@
 import { render, fireEvent } from '@testing-library/react'
 import React from 'react'
-import ChartTrending, { ToolTip } from './ChartTrending'
+import LinearChart, { ToolTip } from './LinearChart'
 
-describe('ChartTrending', () => {
+describe('LinearChart', () => {
   const initProps = {
     xAxis: [1586448000000, 1586534400000, 1586620800000],
     yAxis: [100, 120, 110],
@@ -13,8 +13,8 @@ describe('ChartTrending', () => {
   }
 
   describe('@render', () => {
-    it('renders the ChartTrending without any error', () => {
-      const { asFragment } = render(<ChartTrending {...initProps} />)
+    it('renders the LinearChart without any error', () => {
+      const { asFragment } = render(<LinearChart {...initProps} />)
 
       expect(asFragment()).toMatchSnapshot()
     })
@@ -23,7 +23,7 @@ describe('ChartTrending', () => {
   describe('@events', () => {
     it('shows the tooltip when user hover mouse over to a data point', () => {
       const { getAllByTestId, getByText, queryByText } = render(
-        <ChartTrending {...initProps} />
+        <LinearChart {...initProps} />
       )
 
       const datePoints = getAllByTestId('dataPoint')
@@ -41,7 +41,7 @@ describe('ChartTrending', () => {
 
     it('hide the tooltip when user hover mouse out to a data point', () => {
       const { getAllByTestId, getByText, queryByText } = render(
-        <ChartTrending {...initProps} />
+        <LinearChart {...initProps} />
       )
 
       const datePoints = getAllByTestId('dataPoint')

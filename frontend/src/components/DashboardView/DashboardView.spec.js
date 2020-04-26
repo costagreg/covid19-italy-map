@@ -2,7 +2,8 @@ import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
 import { MockedProvider } from '@apollo/react-testing'
 import wait from 'waait'
-import { Dashboard, FETCH_LATEST_TREND, GET_LATEST_UPDATES } from './Dashboard'
+import DashboardView from './DashboardView'
+import { act } from 'react-dom/test-utils'
 
 const allRegions = [
   'Abruzzo',
@@ -84,7 +85,7 @@ const mocks = [
   },
   {
     request: {
-      query: GET_LATEST_UPDATES,
+      query: FETCH_LATEST_UPDATES,
       variables: {},
     },
     result: { data: { latestUpdates } },
@@ -99,33 +100,31 @@ describe('Dashboard', () => {
           <Dashboard />
         </MockedProvider>
       )
-      await wait(0)
+      
+      await act(() => wait(10))
 
       expect(asFragment()).toMatchSnapshot()
     })
 
     it('shows Sicilia as default selected region', async () => {
-      const { queryByTestId } = render(
+      const { findByTestId } = render(
         <MockedProvider mocks={mocks}>
           <Dashboard />
         </MockedProvider>
       )
-      await wait(0)
 
-      expect(queryByTestId('dataTable-Sicilia')).toBeDefined()
-      expect(queryByTestId('chartTrending')).toBeDefined()
+      expect(await findByTestId('dataTable-Sicilia')).toBeDefined()
+      expect(await findByTestId('chartTrending')).toBeDefined()
     })
 
     it('doesnt show any data if region is not present in the data', async () => {
-      const { getByTestId, queryByTestId } = render(
+      const { findByTestId, queryByTestId } = render(
         <MockedProvider mocks={mocks}>
           <Dashboard />
         </MockedProvider>
       )
 
-      await wait(0)
-
-      const regionBasilicata = getByTestId('Calabria')
+      const regionBasilicata = await findByTestId('Calabria')
 
       fireEvent.click(regionBasilicata)
 

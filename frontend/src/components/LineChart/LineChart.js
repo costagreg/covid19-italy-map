@@ -6,7 +6,8 @@ import { scaleLinear } from 'd3-scale'
 import { max, min } from 'd3-array'
 import { line, curveCatmullRom } from 'd3-shape'
 import { format } from 'date-fns'
-import './ChartTrending.scss'
+
+import './LineChart.scss'
 
 export const ToolTip = ({
   xPos,
@@ -19,12 +20,23 @@ export const ToolTip = ({
   toolTipWidth,
   toolTipHeight,
 }) => {
-
-  xPos = xPos + toolTipWidth < chartWidth ? xPos + 10 : chartWidth - (toolTipWidth + 20)
-  yPos = yPos + toolTipHeight < chartHeight ? yPos + 10 : chartHeight - (toolTipHeight + 20)
+  xPos =
+    xPos + toolTipWidth < chartWidth
+      ? xPos + 10
+      : chartWidth - (toolTipWidth + 20)
+  yPos =
+    yPos + toolTipHeight < chartHeight
+      ? yPos + 10
+      : chartHeight - (toolTipHeight + 20)
 
   return (
-    <foreignObject data-testid='toolTip' x={xPos} y={yPos} width="200" height={100}>
+    <foreignObject
+      data-testid="toolTip"
+      x={xPos}
+      y={yPos}
+      width="200"
+      height={100}
+    >
       <div className="toolTip">
         <div className="toolTip__yValue">
           <b className="toolTip__yValueLabel">{label}</b>:
@@ -36,20 +48,13 @@ export const ToolTip = ({
   )
 }
 
-export default class ChartTrending extends Component {
+class LineChart extends Component {
   state = {
     pointHovered: -1,
   }
   render() {
     const { pointHovered } = this.state
-    const {
-      xAxis,
-      yAxis,
-      chartWidth,
-      chartHeight,
-      margin,
-      yLabel,
-    } = this.props
+    const { xAxis, yAxis, chartWidth, chartHeight, margin, yLabel } = this.props
 
     const [marginTop, marginRight, marginBottom, marginLeft] = margin
 
@@ -69,14 +74,15 @@ export default class ChartTrending extends Component {
     const xTicks = xAxisScale.ticks(6).map((d) =>
       xAxis[d] ? (
         <g
+          key={xAxis[d]}
           transform={`translate(${xAxisScale(d)},${chartHeight -
             marginBottom})`}
         >
-          <text className="chartTrending__xTicksText">
+          <text className="lineChart__xTicksText">
             {format(new Date(+xAxis[d]), 'dd/MM')}
           </text>
           <line
-            className="chartTrending__xTicksLine"
+            className="lineChart__xTicksLine"
             x1="0"
             x1="0"
             y1="0"
@@ -87,7 +93,7 @@ export default class ChartTrending extends Component {
     )
 
     return (
-      <div data-testid="chartTrending" className="chartTrending">
+      <div data-testid="lineChart" className="lineChart">
         <svg
           width={chartWidth}
           height={chartHeight}
@@ -95,7 +101,7 @@ export default class ChartTrending extends Component {
         >
           <g>
             <line
-              className="chartTrending__xAxis"
+              className="lineChart__xAxis"
               x1={marginLeft}
               x2={chartWidth - marginRight}
               y1={chartHeight - marginBottom}
@@ -103,13 +109,16 @@ export default class ChartTrending extends Component {
             />
           </g>
           <g>
-            <path className="chartTrending__line" d={chartLine(yAxis)} />
+            <path className="lineChart__line" d={chartLine(yAxis)} />
             {yAxis.map((d, i) => (
-              <g transform={`translate(${xAxisScale(i)},${yAxisScale(d)})`}>
+              <g
+                key={xAxis[i]}
+                transform={`translate(${xAxisScale(i)},${yAxisScale(d)})`}
+              >
                 <circle
                   className={classnames([
-                    'chartTrending__circle',
-                    { chartTrending__circleSelected: i === pointHovered },
+                    'lineChart__circle',
+                    { lineChart__circleSelected: i === pointHovered },
                   ])}
                   r={2}
                 />
@@ -147,7 +156,7 @@ export default class ChartTrending extends Component {
   }
 }
 
-ChartTrending.protoTypes = {
+LineChart.protoTypes = {
   xAxis: PropTypes.arrayOf(PropTypes.number).isRequired,
   yAxis: PropTypes.arrayOf(
     PropTypes.oneOf([PropTypes.string, PropTypes.number])
@@ -158,7 +167,9 @@ ChartTrending.protoTypes = {
   yLabel: PropTypes.arrayOf(PropTypes.string),
 }
 
-ChartTrending.defaultProps = {
-  margin: [0,0,0,0],
+LineChart.defaultProps = {
+  margin: [0, 0, 0, 0],
   yLabel: '',
 }
+
+export default LineChart

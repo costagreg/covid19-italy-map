@@ -3,10 +3,10 @@
 exports[`Dashboard @render renders the Dashboard without any error 1`] = `
 <DocumentFragment>
   <main
-    class="dashboard"
+    class="dashboardView"
   >
     <section
-      class="dashboard__italyMap"
+      class="dashboardView__italyMap"
     >
       <svg
         class="italyMap"
@@ -139,7 +139,7 @@ exports[`Dashboard @render renders the Dashboard without any error 1`] = `
       </svg>
     </section>
     <section
-      class="dashboard__dataTable"
+      class="dashboardView__dataTable"
     >
       <div
         class="dataTable"
@@ -321,7 +321,92 @@ exports[`Dashboard @render renders the Dashboard without any error 1`] = `
           The data above are updated on April 09 2020
         </div>
       </div>
-      <div />
+      <section
+        class="dashboardView__chartTrending"
+      >
+        <div
+          class="lineChart"
+          data-testid="lineChart"
+        >
+          <svg
+            height="200"
+            viewBox="0 0 400 200"
+            width="400"
+          >
+            <g>
+              <line
+                class="lineChart__xAxis"
+                x1="20"
+                x2="380"
+                y1="170"
+                y2="170"
+              />
+            </g>
+            <g>
+              <path
+                class="lineChart__line"
+                d="M20,90L380,10"
+              />
+              <g
+                transform="translate(20,90)"
+              >
+                <circle
+                  class="lineChart__circle"
+                  r="2"
+                />
+                <circle
+                  data-testid="dataPoint"
+                  fill="transparent"
+                  r="10"
+                />
+              </g>
+              <g
+                transform="translate(380,10)"
+              >
+                <circle
+                  class="lineChart__circle"
+                  r="2"
+                />
+                <circle
+                  data-testid="dataPoint"
+                  fill="transparent"
+                  r="10"
+                />
+              </g>
+            </g>
+            <g
+              transform="translate(20,170)"
+            >
+              <text
+                class="lineChart__xTicksText"
+              >
+                01/01
+              </text>
+              <line
+                class="lineChart__xTicksLine"
+                x1="0"
+                y1="0"
+                y2="5"
+              />
+            </g>
+            <g
+              transform="translate(380,170)"
+            >
+              <text
+                class="lineChart__xTicksText"
+              >
+                01/01
+              </text>
+              <line
+                class="lineChart__xTicksLine"
+                x1="0"
+                y1="0"
+                y2="5"
+              />
+            </g>
+          </svg>
+        </div>
+      </section>
     </section>
   </main>
 </DocumentFragment>

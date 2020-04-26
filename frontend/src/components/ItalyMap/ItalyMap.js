@@ -95,7 +95,7 @@ function ItalyMap({ width, height, data, selectRegion, selectedRegion }) {
 ItalyMap.propTypes = {
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
-  data: PropTypes.object.isRequired,
+  data: PropTypes.array.isRequired,
   selectRegion: PropTypes.func.isRequired,
   selectedRegion: PropTypes.string.isRequired,
 }

@@ -28,7 +28,7 @@ describe('Loader', () => {
         jest.advanceTimersByTime(10000)
       })
 
-      expect(queryByTitle('Loading')).to()
+      expect(queryByTitle('Loading')).toBeTruthy()
     })
   })
 })
