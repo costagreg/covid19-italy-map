@@ -1,1 +1,1 @@
-export { ChartTrending as default } from './ChartTrending'
+export { default } from './ChartTrending'

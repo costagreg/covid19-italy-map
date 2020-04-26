@@ -19,7 +19,7 @@ export default function DataTable({
       className="dataTable"
     >
       <div className="dataTable__header">{regionData['region']}</div>
-      {params.map(({ name, label }) => (
+      {Object.keys(params).map((name) => (
         <div
           key={name}
           role="button"
@@ -27,8 +27,9 @@ export default function DataTable({
             dataTable__rowSelected: selectedParam === name,
           })}
           onClick={() => selectParam(name)}
+          title={params[name]}
         >
-          <div className="dataTable__col">{label}</div>
+          <div className="dataTable__col">{params[name]}</div>
           <div className="dataTable__col">{regionData[name]}</div>
         </div>
       ))}

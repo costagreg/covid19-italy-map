@@ -93,7 +93,7 @@ class LineChart extends Component {
     )
 
     return (
-      <div data-testid="lineChart" className="lineChart">
+      <div className="lineChart">
         <svg
           width={chartWidth}
           height={chartHeight}

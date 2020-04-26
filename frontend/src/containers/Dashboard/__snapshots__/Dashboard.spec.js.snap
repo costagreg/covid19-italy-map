@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Dashboard @event click region shows table data for that region 1`] = `<DocumentFragment />`;
+
 exports[`Dashboard @render renders the Dashboard without any error 1`] = `
 <DocumentFragment>
   <main
@@ -153,6 +155,7 @@ exports[`Dashboard @render renders the Dashboard without any error 1`] = `
         <div
           class="dataTable__row"
           role="button"
+          title="Hospitalized With Symptoms"
         >
           <div
             class="dataTable__col"
@@ -168,11 +171,12 @@ exports[`Dashboard @render renders the Dashboard without any error 1`] = `
         <div
           class="dataTable__row"
           role="button"
+          title="Intensive Care"
         >
           <div
             class="dataTable__col"
           >
-            Intensive Cares
+            Intensive Care
           </div>
           <div
             class="dataTable__col"
@@ -183,6 +187,7 @@ exports[`Dashboard @render renders the Dashboard without any error 1`] = `
         <div
           class="dataTable__row"
           role="button"
+          title="Total Hospitalized"
         >
           <div
             class="dataTable__col"
@@ -198,6 +203,7 @@ exports[`Dashboard @render renders the Dashboard without any error 1`] = `
         <div
           class="dataTable__row"
           role="button"
+          title="Home Isolation"
         >
           <div
             class="dataTable__col"
@@ -213,6 +219,7 @@ exports[`Dashboard @render renders the Dashboard without any error 1`] = `
         <div
           class="dataTable__row"
           role="button"
+          title="Total Positive"
         >
           <div
             class="dataTable__col"
@@ -228,6 +235,7 @@ exports[`Dashboard @render renders the Dashboard without any error 1`] = `
         <div
           class="dataTable__row"
           role="button"
+          title="Total Change Positive"
         >
           <div
             class="dataTable__col"
@@ -243,6 +251,7 @@ exports[`Dashboard @render renders the Dashboard without any error 1`] = `
         <div
           class="dataTable__row"
           role="button"
+          title="New Positive"
         >
           <div
             class="dataTable__col"
@@ -258,6 +267,7 @@ exports[`Dashboard @render renders the Dashboard without any error 1`] = `
         <div
           class="dataTable__row"
           role="button"
+          title="Discharged Healed"
         >
           <div
             class="dataTable__col"
@@ -273,6 +283,7 @@ exports[`Dashboard @render renders the Dashboard without any error 1`] = `
         <div
           class="dataTable__row"
           role="button"
+          title="Total Deaths"
         >
           <div
             class="dataTable__col"
@@ -288,6 +299,7 @@ exports[`Dashboard @render renders the Dashboard without any error 1`] = `
         <div
           class="dataTable__row dataTable__rowSelected"
           role="button"
+          title="Total Cases"
         >
           <div
             class="dataTable__col"
@@ -303,6 +315,7 @@ exports[`Dashboard @render renders the Dashboard without any error 1`] = `
         <div
           class="dataTable__row"
           role="button"
+          title="Total Tests"
         >
           <div
             class="dataTable__col"
@@ -325,89 +338,96 @@ exports[`Dashboard @render renders the Dashboard without any error 1`] = `
         class="dashboardView__chartTrending"
       >
         <div
-          class="lineChart"
-          data-testid="lineChart"
+          data-testid="chartTrending-Sicilia"
         >
-          <svg
-            height="200"
-            viewBox="0 0 400 200"
-            width="400"
+          <div
+            class="lineChart"
           >
-            <g>
-              <line
-                class="lineChart__xAxis"
-                x1="20"
-                x2="380"
-                y1="170"
-                y2="170"
-              />
-            </g>
-            <g>
-              <path
-                class="lineChart__line"
-                d="M20,90L380,10"
-              />
-              <g
-                transform="translate(20,90)"
-              >
-                <circle
-                  class="lineChart__circle"
-                  r="2"
+            <svg
+              height="200"
+              viewBox="0 0 400 200"
+              width="400"
+            >
+              <g>
+                <line
+                  class="lineChart__xAxis"
+                  x1="20"
+                  x2="380"
+                  y1="170"
+                  y2="170"
                 />
-                <circle
-                  data-testid="dataPoint"
-                  fill="transparent"
-                  r="10"
+              </g>
+              <g>
+                <path
+                  class="lineChart__line"
+                  d="M20,90L380,10"
+                />
+                <g
+                  transform="translate(20,90)"
+                >
+                  <circle
+                    class="lineChart__circle"
+                    r="2"
+                  />
+                  <circle
+                    data-testid="dataPoint"
+                    fill="transparent"
+                    r="10"
+                  />
+                </g>
+                <g
+                  transform="translate(380,10)"
+                >
+                  <circle
+                    class="lineChart__circle"
+                    r="2"
+                  />
+                  <circle
+                    data-testid="dataPoint"
+                    fill="transparent"
+                    r="10"
+                  />
+                </g>
+              </g>
+              <g
+                transform="translate(20,170)"
+              >
+                <text
+                  class="lineChart__xTicksText"
+                >
+                  01/01
+                </text>
+                <line
+                  class="lineChart__xTicksLine"
+                  x1="0"
+                  y1="0"
+                  y2="5"
                 />
               </g>
               <g
-                transform="translate(380,10)"
+                transform="translate(380,170)"
               >
-                <circle
-                  class="lineChart__circle"
-                  r="2"
-                />
-                <circle
-                  data-testid="dataPoint"
-                  fill="transparent"
-                  r="10"
+                <text
+                  class="lineChart__xTicksText"
+                >
+                  01/01
+                </text>
+                <line
+                  class="lineChart__xTicksLine"
+                  x1="0"
+                  y1="0"
+                  y2="5"
                 />
               </g>
-            </g>
-            <g
-              transform="translate(20,170)"
-            >
-              <text
-                class="lineChart__xTicksText"
-              >
-                01/01
-              </text>
-              <line
-                class="lineChart__xTicksLine"
-                x1="0"
-                y1="0"
-                y2="5"
-              />
-            </g>
-            <g
-              transform="translate(380,170)"
-            >
-              <text
-                class="lineChart__xTicksText"
-              >
-                01/01
-              </text>
-              <line
-                class="lineChart__xTicksLine"
-                x1="0"
-                y1="0"
-                y2="5"
-              />
-            </g>
-          </svg>
+            </svg>
+          </div>
         </div>
       </section>
     </section>
   </main>
 </DocumentFragment>
 `;
+
+exports[`Dashboard @render shows Sicilia as default selected region 1`] = `<DocumentFragment />`;
+
+exports[`Dashboard @render shows totalCases as default param 1`] = `<DocumentFragment />`;

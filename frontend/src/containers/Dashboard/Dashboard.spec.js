@@ -66,9 +66,15 @@ const latestUpdates = {
   __typename: 'latestUpdates',
 }
 
-const latestTrendParam = {
+const latestTrendParamSicilia = {
   x: [1, 2],
   y: [10, 20],
+  __typename: 'xy',
+}
+
+const latestTrendParamBasilicata = {
+  x: [10, 23],
+  y: [30, 4],
   __typename: 'xy',
 }
 
@@ -80,7 +86,18 @@ const mocks = [
     },
     result: {
       data: {
-        latestTrendParam,
+        latestTrendParam: latestTrendParamSicilia,
+      },
+    },
+  },
+  {
+    request: {
+      query: FETCH_LATEST_TREND,
+      variables: { region: 'Basilicata', param: 'totalCases' },
+    },
+    result: {
+      data: {
+        latestTrendParam: latestTrendParamBasilicata,
       },
     },
   },
@@ -101,7 +118,7 @@ describe('Dashboard', () => {
           <Dashboard />
         </MockedProvider>
       )
-      
+
       await act(() => wait(10))
 
       expect(asFragment()).toMatchSnapshot()
@@ -114,8 +131,61 @@ describe('Dashboard', () => {
         </MockedProvider>
       )
 
+      await act(() => wait(10))
+
       expect(await findByTestId('dataTable-Sicilia')).toBeDefined()
-      expect(await findByTestId('lineChart')).toBeDefined()
-    }
+      expect(await findByTestId('chartTrending-Sicilia')).toBeDefined()
+    })
+
+    it('shows totalCases as default param', async () => {
+      const { findByTitle } = render(
+        <MockedProvider mocks={mocks}>
+          <Dashboard />
+        </MockedProvider>
+      )
+
+      await act(() => wait(10))
+
+      expect(await findByTitle('Total Cases')).toHaveClass(
+        'dataTable__rowSelected'
+      )
+    })
+
+    it('shows an error message if data hasn not fetched properly', async () => {
+      const { findByText} = render(
+        <MockedProvider mocks={[{
+          request: {
+            query: FETCH_LATEST_UPDATES,
+            variables: {},
+          },
+          error: new Error("Something wrong!")
+        }]}>
+          <Dashboard />
+        </MockedProvider>
+      )
+
+      expect(await findByText('Ops something went wrong')).toBeDefined()
+    })
+  })
+
+  describe('@event', () => {
+    describe('click region', () => {
+      it('shows table data for that region', async () => {
+        const { debug, findByTestId, queryByTestId } = render(
+          <MockedProvider mocks={mocks}>
+            <Dashboard />
+          </MockedProvider>
+        )
+
+        const region = await findByTestId('Basilicata')
+
+        fireEvent.click(region)
+
+        await act(() => wait(1000))
+
+        expect(await findByTestId('dataTable-Basilicata')).toBeDefined()
+        expect(queryByTestId('dataTable-Sicilia')).toBeNull()
+      })
+    })
   })
 })

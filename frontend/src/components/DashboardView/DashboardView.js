@@ -44,13 +44,14 @@ const DashboardView = ({
   </main>
 )
 
-// DashboardView.propTypes = {
-//   selectedRegion: 
-//   selectedParam,
-//   selectRegion,
-//   selectParam,
-//   selectedRegionData,
-//   regions,
-//   date,
-// }
+DashboardView.propTypes = {
+  selectedRegion: propTypes.string.isRequired,
+  selectedParam:  propTypes.string.isRequired,
+  selectRegion: propTypes.func.isRequired,
+  selectParam: propTypes.func.isRequired,
+  selectedRegionData: propTypes.object.isRequired,
+  regions: propTypes.array.isRequired,
+  date: propTypes.string.isRequired,
+}
+
 export default DashboardView

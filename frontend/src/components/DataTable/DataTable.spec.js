@@ -1,4 +1,4 @@
-import { render, fireEvent} from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react'
 import React from 'react'
 import DataTable from './DataTable'
 
@@ -32,15 +32,17 @@ describe('DataTable', () => {
   })
 
   describe('@event', () => {
-    it('renders the DataTable without any error', () => {
+    it('triggers selectParam when a row is selected', () => {
       const selectParam = jest.fn()
-      const { getAllByRole } = render(<DataTable {...initProps} selectParam={selectParam} />)
+      const { getAllByRole } = render(
+        <DataTable {...initProps} selectParam={selectParam} />
+      )
 
       const dataRows = getAllByRole('button')
 
       fireEvent.click(dataRows[0])
 
       expect(selectParam).toHaveBeenCalled()
-    }) 
+    })
   })
 })
