@@ -71,6 +71,8 @@ class LineChart extends Component {
       .y((d) => yAxisScale(d))
       .curve(curveCatmullRom.alpha(0.5))
 
+    // console.log(yAxis)
+
     const xTicks = xAxisScale.ticks(6).map((d) =>
       xAxis[d] ? (
         <g

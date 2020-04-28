@@ -1,17 +1,32 @@
-.dashboardView{
+.dashboardView {
   display: flex;
 
-  &__italyMap{
+  &__italyMap {
     flex: 50%;
   }
-  &__dataTable{
+
+  &__dataTable {
     display: flex;
     flex-flow: column;
     align-items: center;
     flex: 50%;
   }
-  &__chartTrending{
+
+  &__chartTrending {
     position: relative;
     padding: 20px 0;
+  }
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+  .dashboardView {
+    display: block;
+
+    &__italyMap {
+      width: 100%;
+      height: 75vh;
+
+    }
   }
 }

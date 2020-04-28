@@ -19,7 +19,9 @@ const Region = memo(
       })}
       fill={interpolateReds(percentages[region])}
       onClick={() => onClick(region)}
-    />
+    >
+      <title>{region}</title>
+    </path>
   )
 )
 
@@ -43,7 +45,7 @@ function ItalyMap({ width, height, data, selectRegion, selectedRegion }) {
     .center([0, 41])
     .rotate([347, 0])
     .parallels([35, 45])
-    .scale(4000)
+    .scale(width > 450 ? 4000 : 2000)
     .translate([width / 2, height / 1.8]), [width, height])
 
   const percentages = useMemo(() => calcPercentage('totalCases', data), [data])
@@ -60,6 +62,7 @@ function ItalyMap({ width, height, data, selectRegion, selectedRegion }) {
       height={height}
       viewBox={`0 0 ${width} ${height}`}
       className="italyMap"
+      data-testid="italyMap"
     >
       <g>
         {geographies.map((d, i) => {

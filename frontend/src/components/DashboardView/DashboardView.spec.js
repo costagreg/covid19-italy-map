@@ -2,8 +2,14 @@ import React from 'react'
 import DashboardView from './DashboardView'
 import wait from 'waait'
 import { MockedProvider } from '@apollo/react-testing'
-import { render, act } from '@testing-library/react'
+import { render, act, fireEvent } from '@testing-library/react'
 import { FETCH_LATEST_TREND } from '../../queries'
+// jest
+// .spyOn(React, 'useRef')
+// .mockReturnValue({
+//   current: { offsetWidth: 500, offsetHeight: 400 },
+// })
+
 const regions = [
   {
     region: 'Sicilia',
@@ -79,6 +85,41 @@ describe('Dashboard View', () => {
       await act(() => wait(0))
 
       expect(asFragment()).toMatchSnapshot()
+    })
+  })
+
+  describe('@event', () => {
+    describe('onResize', () => {
+      it('will resize the map accordingly id when div change size', async () => {
+        const { findByTestId } = render(
+          <MockedProvider mocks={mocks}>
+            <DashboardView {...props} />
+          </MockedProvider>
+        )
+
+        expect(await findByTestId('italyMap')).toHaveAttribute('width', '0')
+        expect(await findByTestId('italyMap')).toHaveAttribute('height', '0')
+
+        act(() => {
+          Object.defineProperties(window.HTMLElement.prototype, {
+            offsetHeight: {
+              get: function() {
+                return 100
+              },
+            },
+            offsetWidth: {
+              get: function() {
+                return 500
+              },
+            },
+          })
+
+          window.dispatchEvent(new Event('resize'))
+        })
+
+        expect(await findByTestId('italyMap')).toHaveAttribute('width', '500')
+        expect(await findByTestId('italyMap')).toHaveAttribute('height', '100')
+      })
     })
   })
 })

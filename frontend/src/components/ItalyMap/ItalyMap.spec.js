@@ -7,31 +7,31 @@ const initProps = {
   width: 100,
   height: 200,
   data: [
-      {
-        region: 'Sicilia',
-        totalCases: 5,
-      },
-      {
-        region: "Valle d'Aosta",
-        totalCases: 25,
-      },
-      {
-        region: "Abruzzo",
-        totalCases: 10,
-      },
-      {
-        region: "Puglia",
-        totalCases: 10,
-      },
-      {
-        region: "Basilicata",
-        totalCases: 40,
-      },
-      {
-        region: "Calabria",
-        totalCases: 10,
-      },
-    ],
+    {
+      region: 'Sicilia',
+      totalCases: 5,
+    },
+    {
+      region: "Valle d'Aosta",
+      totalCases: 25,
+    },
+    {
+      region: 'Abruzzo',
+      totalCases: 10,
+    },
+    {
+      region: 'Puglia',
+      totalCases: 10,
+    },
+    {
+      region: 'Basilicata',
+      totalCases: 40,
+    },
+    {
+      region: 'Calabria',
+      totalCases: 10,
+    },
+  ],
 }
 
 describe('<ItalyMap />', () => {
@@ -62,7 +62,7 @@ describe('<ItalyMap />', () => {
     })
 
     it('highlights the region selected', () => {
-      const { getByTestId} = render(
+      const { getByTestId } = render(
         <ItalyMap {...initProps} selectedRegion="Basilicata" />
       )
 
@@ -73,15 +73,30 @@ describe('<ItalyMap />', () => {
     })
 
     it('fill regions path with a different color depending on intensity', () => {
-      const { getByTestId} = render(
+      const { getByTestId } = render(
         <ItalyMap {...initProps} selectedRegion="Basilicata" />
       )
 
-      expect(getByTestId('Sicilia')).toHaveAttribute('fill', interpolateReds(0.05))
-      expect(getByTestId('Valle d\'Aosta')).toHaveAttribute('fill', interpolateReds(0.25))
-      expect(getByTestId('Abruzzo')).toHaveAttribute('fill', interpolateReds(0.1))
-      expect(getByTestId('Basilicata')).toHaveAttribute('fill', interpolateReds(0.4))
-      expect(getByTestId('Calabria')).toHaveAttribute('fill', interpolateReds(0.1))
+      expect(getByTestId('Sicilia')).toHaveAttribute(
+        'fill',
+        interpolateReds(0.05)
+      )
+      expect(getByTestId("Valle d'Aosta")).toHaveAttribute(
+        'fill',
+        interpolateReds(0.25)
+      )
+      expect(getByTestId('Abruzzo')).toHaveAttribute(
+        'fill',
+        interpolateReds(0.1)
+      )
+      expect(getByTestId('Basilicata')).toHaveAttribute(
+        'fill',
+        interpolateReds(0.4)
+      )
+      expect(getByTestId('Calabria')).toHaveAttribute(
+        'fill',
+        interpolateReds(0.1)
+      )
     })
   })
 
@@ -96,7 +111,7 @@ describe('<ItalyMap />', () => {
         const regionLombardia = getByTestId('Lombardia')
 
         fireEvent.click(regionLombardia)
-        
+
         expect(selectRegionMock).toHaveBeenCalledWith('Lombardia')
       })
     })

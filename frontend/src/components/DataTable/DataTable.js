@@ -35,7 +35,7 @@ export default function DataTable({
       ))}
 
       <div className="dataTable__rowDate">
-        The data above are updated on {updatesDateFormated}
+        Data updated on {updatesDateFormated}
       </div>
     </div>
   )

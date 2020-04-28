@@ -14,12 +14,12 @@ exports[`DataTable @render renders the DataTable without any error 1`] = `
     <div
       class="dataTable__row"
       role="button"
-      title="Hospitalized With Symptoms"
+      title="Ricoverati con sintomi"
     >
       <div
         class="dataTable__col"
       >
-        Hospitalized With Symptoms
+        Ricoverati con sintomi
       </div>
       <div
         class="dataTable__col"
@@ -30,12 +30,12 @@ exports[`DataTable @render renders the DataTable without any error 1`] = `
     <div
       class="dataTable__row"
       role="button"
-      title="Intensive Care"
+      title="Terapia intensive"
     >
       <div
         class="dataTable__col"
       >
-        Intensive Care
+        Terapia intensive
       </div>
       <div
         class="dataTable__col"
@@ -46,12 +46,12 @@ exports[`DataTable @render renders the DataTable without any error 1`] = `
     <div
       class="dataTable__row"
       role="button"
-      title="Total Hospitalized"
+      title="Totale ospedalizzati"
     >
       <div
         class="dataTable__col"
       >
-        Total Hospitalized
+        Totale ospedalizzati
       </div>
       <div
         class="dataTable__col"
@@ -62,12 +62,12 @@ exports[`DataTable @render renders the DataTable without any error 1`] = `
     <div
       class="dataTable__row"
       role="button"
-      title="Home Isolation"
+      title="Isolamento domiciliare"
     >
       <div
         class="dataTable__col"
       >
-        Home Isolation
+        Isolamento domiciliare
       </div>
       <div
         class="dataTable__col"
@@ -78,12 +78,12 @@ exports[`DataTable @render renders the DataTable without any error 1`] = `
     <div
       class="dataTable__row"
       role="button"
-      title="Total Positive"
+      title="Totale positivi"
     >
       <div
         class="dataTable__col"
       >
-        Total Positive
+        Totale positivi
       </div>
       <div
         class="dataTable__col"
@@ -94,12 +94,12 @@ exports[`DataTable @render renders the DataTable without any error 1`] = `
     <div
       class="dataTable__row"
       role="button"
-      title="Total Change Positive"
+      title="Variazione totale positivi"
     >
       <div
         class="dataTable__col"
       >
-        Total Change Positive
+        Variazione totale positivi
       </div>
       <div
         class="dataTable__col"
@@ -110,12 +110,12 @@ exports[`DataTable @render renders the DataTable without any error 1`] = `
     <div
       class="dataTable__row"
       role="button"
-      title="New Positive"
+      title="Nuovi positivi"
     >
       <div
         class="dataTable__col"
       >
-        New Positive
+        Nuovi positivi
       </div>
       <div
         class="dataTable__col"
@@ -126,12 +126,12 @@ exports[`DataTable @render renders the DataTable without any error 1`] = `
     <div
       class="dataTable__row"
       role="button"
-      title="Discharged Healed"
+      title="Dimessi guariti"
     >
       <div
         class="dataTable__col"
       >
-        Discharged Healed
+        Dimessi guariti
       </div>
       <div
         class="dataTable__col"
@@ -142,12 +142,12 @@ exports[`DataTable @render renders the DataTable without any error 1`] = `
     <div
       class="dataTable__row"
       role="button"
-      title="Total Deaths"
+      title="Deceduti"
     >
       <div
         class="dataTable__col"
       >
-        Total Deaths
+        Deceduti
       </div>
       <div
         class="dataTable__col"
@@ -158,12 +158,12 @@ exports[`DataTable @render renders the DataTable without any error 1`] = `
     <div
       class="dataTable__row dataTable__rowSelected"
       role="button"
-      title="Total Cases"
+      title="Casi totali"
     >
       <div
         class="dataTable__col"
       >
-        Total Cases
+        Casi totali
       </div>
       <div
         class="dataTable__col"
@@ -174,12 +174,12 @@ exports[`DataTable @render renders the DataTable without any error 1`] = `
     <div
       class="dataTable__row"
       role="button"
-      title="Total Tests"
+      title="Tamponi"
     >
       <div
         class="dataTable__col"
       >
-        Total Tests
+        Tamponi
       </div>
       <div
         class="dataTable__col"
@@ -190,7 +190,7 @@ exports[`DataTable @render renders the DataTable without any error 1`] = `
     <div
       class="dataTable__rowDate"
     >
-      The data above are updated on April 09 2020
+      Data updated on April 09 2020
     </div>
   </div>
 </DocumentFragment>

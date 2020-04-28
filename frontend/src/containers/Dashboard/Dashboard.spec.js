@@ -146,7 +146,7 @@ describe('Dashboard', () => {
 
       await act(() => wait(10))
 
-      expect(await findByTitle('Total Cases')).toHaveClass(
+      expect(await findByTitle('Casi totali')).toHaveClass(
         'dataTable__rowSelected'
       )
     })
