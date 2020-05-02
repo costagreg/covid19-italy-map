@@ -1,7 +1,7 @@
-import React, { Component, memo, useMemo, useEffect, useState } from 'react'
+import React, { memo, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import { geoPath, geoAlbers, geoCentroid } from 'd3-geo'
+import { geoPath, geoAlbers } from 'd3-geo'
 import { interpolateReds } from 'd3-scale-chromatic'
 
 import { feature } from 'topojson-client'
@@ -45,8 +45,8 @@ function ItalyMap({ width, height, data, selectRegion, selectedRegion }) {
     .center([0, 41])
     .rotate([347, 0])
     .parallels([35, 45])
-    .scale(width > 450 ? 4000 : 2000)
-    .translate([width / 2, height / 1.8]), [width, height])
+    .scale((3000 * width)/600)
+    .translate([width / 2, height / 1.9]), [width, height])
 
   const percentages = useMemo(() => calcPercentage('totalCases', data), [data])
 

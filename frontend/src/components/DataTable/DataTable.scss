@@ -1,5 +1,8 @@
 .dataTable{
   width: 50%;
+  @media only screen and (min-width : 320px) and (max-width : 600px) {
+    width: 80%;
+  }
   &__header{
     text-align: center;
     padding: 20px 0;

@@ -1,4 +1,4 @@
-import React, { Component, Fragment, useRef, useEffect } from 'react'
+import React, { Component } from 'react'
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
 
@@ -6,6 +6,8 @@ import { scaleLinear } from 'd3-scale'
 import { max, min } from 'd3-array'
 import { line, curveCatmullRom } from 'd3-shape'
 import { format } from 'date-fns'
+
+import { params } from '../../constants/index'
 
 import './LineChart.scss'
 
@@ -145,7 +147,7 @@ class LineChart extends Component {
               yPos={yAxisScale(yAxis[pointHovered])}
               xValue={format(new Date(+xAxis[pointHovered]), 'dd/MM/yy')}
               yValue={yAxis[pointHovered]}
-              label={yLabel}
+              label={params[yLabel]}
               chartWidth={chartWidth}
               chartHeight={chartHeight}
               toolTipWidth={200}
