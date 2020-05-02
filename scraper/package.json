@@ -1,0 +1,31 @@
+{
+  "name": "covid-19-to-mongodb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/costagreg/covid-19-to-mongodb.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/costagreg/covid-19-to-mongodb/issues"
+  },
+  "homepage": "https://github.com/costagreg/covid-19-to-mongodb#readme",
+  "devDependencies": {
+    "@babel/preset-env": "^7.9.5",
+    "@babel/register": "^7.9.0",
+    "jest": "^25.2.7"
+  },
+  "dependencies": {
+    "csvtojson": "^2.0.10",
+    "dotenv": "^8.2.0",
+    "mongoose": "^5.9.7",
+    "node-fetch": "^2.6.0"
+  }
+}
