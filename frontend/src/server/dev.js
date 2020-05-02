@@ -8,7 +8,7 @@ import config from './../../webpack.dev.config.js'
 
 const app = express()
 const compiler = webpack(config)
-const port = process.env.PORT
+const port = process.env.PORT | 8080
 
 app.use(
   webpackDevMiddleware(compiler, {

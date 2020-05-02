@@ -17,7 +17,7 @@ module.exports = {
         test: /\.(png|jpe?g|gif|svg)$/,
         use: [
           {
-            loader: 'url-loader',
+            loader: 'file-loader',
           },
         ],
       },
@@ -25,7 +25,7 @@ module.exports = {
         test: /\.(woff|woff2|ttf|otf|eot)$/,
         use: [
           {
-            loader: 'url-loader',
+            loader: 'file-loader',
           },
         ],
       },

@@ -1,7 +1,6 @@
 const path = require('path')
 const nodeExternals = require('webpack-node-externals')
 const webpack = require('webpack')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const globImporter = require('node-sass-glob-importer')
 const merge = require('webpack-merge')
 const common = require('./webpack.dev.common.js')
@@ -40,11 +39,6 @@ const client = merge(common, {
           },
           {
             loader: 'sass-loader',
-            options: {
-              sassOptions: {
-                importer: globImporter(),
-              },
-            },
           },
         ],
       },
@@ -84,11 +78,6 @@ const server = merge(common, {
           },
           {
             loader: 'sass-loader',
-            options: {
-              sassOptions: {
-                importer: globImporter(),
-              },
-            },
           },
         ],
       },
