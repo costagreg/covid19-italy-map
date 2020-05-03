@@ -39,6 +39,7 @@ const client = merge(common, {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production'),
+        GRAPHQL_URL: JSON.stringify(process.env.GRAPHQL_URL),
       },
     }),
   ],

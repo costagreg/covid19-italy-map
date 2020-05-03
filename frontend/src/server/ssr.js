@@ -17,9 +17,11 @@ const client = new ApolloClient({
   link: createHttpLink({
     credentials: 'include',
     fetch,
-    uri: 'http://localhost:3001/graphql'
+    uri: process.env.GRAPHQL_URL
   })
 })
+
+console.log('SERVER ------>',process.env.GRAPHQL_URL)
 
 export default function serverRenderer() {
   return async (req, res) => {

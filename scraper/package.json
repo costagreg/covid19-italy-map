@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "node src/index.js"
+    "dev": "NODE_ENV=development node src/index.js",
+    "prod": "NODE_ENV=production node src/index.js"
   },
   "repository": {
     "type": "git",
@@ -18,14 +19,14 @@
   },
   "homepage": "https://github.com/costagreg/covid-19-to-mongodb#readme",
   "devDependencies": {
-    "@babel/preset-env": "^7.9.5",
-    "@babel/register": "^7.9.0",
     "jest": "^25.2.7"
   },
   "dependencies": {
     "csvtojson": "^2.0.10",
     "dotenv": "^8.2.0",
     "mongoose": "^5.9.7",
-    "node-fetch": "^2.6.0"
+    "node-fetch": "^2.6.0",
+    "@babel/preset-env": "^7.9.5",
+    "@babel/register": "^7.9.0"
   }
 }

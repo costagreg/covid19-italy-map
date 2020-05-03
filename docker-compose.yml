@@ -1,0 +1,56 @@
+version: "3.6"
+services:
+  mongo:
+    container_name: mongo
+    image: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
+      - MONGO_INITDB_DATABASE=scraper
+      - NODE_ENV=production
+    volumes:
+      - ./data:/data/db
+    ports:
+      - ${MONGO_PORT}:${MONGO_PORT}
+
+  backend:
+    build: ./backend
+    container_name: backend
+    expose:
+      - ${APP_BACKEND_PORT}
+    environment:
+      - MONGODB_URI=mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongo:${MONGO_PORT}/scraper?authSource=admin
+      # - MONGODB_URI=mongodb://root:greg92@ds127624.mlab.com:27624/scraper?authSource=admin
+      - PORT=${APP_BACKEND_PORT}
+      - NODE_ENV=production
+    restart: always
+    ports:
+      - ${APP_BACKEND_PORT}:${APP_BACKEND_PORT}
+    expose:
+      - ${APP_BACKEND_PORT}
+    depends_on:
+      - mongo
+  
+  app:
+    build: ./frontend
+    container_name: frontend
+    environment:
+      - GRAPHQL_URL=http://backend:${APP_BACKEND_PORT}/graphql
+    expose:
+      - ${APP_FRONTEND_PORT}
+    restart: always
+    depends_on:
+      - mongo
+      - backend 
+    ports:
+      - ${APP_FRONTEND_PORT}:${APP_FRONTEND_PORT}
+
+  scraper:
+    build: ./scraper
+    container_name: scraper
+    depends_on:
+      - mongo
+    environment:
+      - MONGODB_URI=mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongo:${MONGO_PORT}/scraper?authSource=admin
+      - NODE_ENV=production
+

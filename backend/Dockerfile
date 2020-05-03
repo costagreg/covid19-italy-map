@@ -1,11 +1,9 @@
 FROM node:13.8.0
 
-WORKDIR /usr/src/app
+WORKDIR /usr/app
 
 COPY . .
 
 RUN npm install
-
-EXPOSE 3001
 
 CMD [ "npm", "run", "prod" ]

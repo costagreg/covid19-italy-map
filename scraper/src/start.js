@@ -5,6 +5,7 @@ const init = async () => {
   await scraper()
   const end = new Date()
   console.info('Execution time: %dms', end - start)
+  process.exit()
 }
 
 init()

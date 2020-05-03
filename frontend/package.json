@@ -84,8 +84,8 @@
     "webpack-node-externals": "^1.7.2"
   },
   "scripts": {
-    "dev": "PORT=8080 NODE_ENV=dev node src/server",
-    "prod": "PORT=8080 NODE_ENV=production webpack --config webpack.prod.config.js",
+    "dev": "PORT=8080 NODE_ENV=development node src/server",
+    "prod": "NODE_ENV=production webpack --config webpack.prod.config.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "jest": "jest"
   },

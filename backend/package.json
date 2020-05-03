@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon index.js",
-    "prod": "node index.js"
+    "dev": "NODE_ENV=development nodemon index.js",
+    "prod": "NODE_ENV=production node index.js"
   },
   "dependencies": {
     "@babel/core": "^7.9.0",
