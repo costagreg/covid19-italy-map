@@ -14,7 +14,7 @@ const client = new ApolloClient({
   cache: new InMemoryCache().restore(preloadedStore),
   link: new HttpLink({
     credentials: 'include',
-    uri: 'http://localhost:3001/graphql'
+    uri: '/graphql'
   })
 })
 

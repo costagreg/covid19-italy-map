@@ -21,8 +21,6 @@ const client = new ApolloClient({
   })
 })
 
-console.log('SERVER ------>',process.env.GRAPHQL_URL)
-
 export default function serverRenderer() {
   return async (req, res) => {
     const app = ReactDOMServer.renderToString(
@@ -32,13 +30,8 @@ export default function serverRenderer() {
     )
 
     await getDataFromTree(App)
-    console.log('----------------')
-    console.log(client.extract())
     const helmet = Helmet.renderStatic()
     const preloadedState = { store: client.extract() }
-
-    console.log(preloadedState)
-
 
     return res.send(template(app, helmet, preloadedState))
   }
