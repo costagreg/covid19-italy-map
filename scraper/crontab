@@ -1,1 +1,3 @@
-* * * * * /usr/local/bin/node /usr/app/src/index.js >> /var/log/cron.log 2>&1
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+59 23 * * * . /usr/project_env.sh; cd /usr/app && npm run prod >> /var/log/cron.log 2>&1

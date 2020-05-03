@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:13.8.0
 
 RUN apt-get update && apt-get -y install cron
 
@@ -21,4 +21,4 @@ COPY . .
 RUN npm install
 
 # Run the command on container startup
-CMD npm run dev && cron && tail -f /var/log/cron.log
+CMD  printenv | sed 's/^\(.*\)$/export \1/g' > /usr/project_env.sh && npm run prod && echo "yeap" && cron && tail -f /var/log/cron.log
