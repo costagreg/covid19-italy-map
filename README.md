@@ -1,5 +1,5 @@
 # covid19-italy-map
-Another data visualization project using the Coronavirus data provided by [La Protezione Civile](https://github.com/pcm-dpc/COVID-19)
+Another data visualization project using the Coronavirus data provided by [La Protezione Civile](https://github.com/pcm-dpc/COVID-19) using React, D3, Apollo and Mongoose!
 
 
 Demo: https://covid19.ilovecoding.dev/
