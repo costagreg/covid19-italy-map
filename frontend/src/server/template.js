@@ -3,6 +3,7 @@ export default (markup, helmet, state) => {
     <html ${helmet.htmlAttributes.toString()}>
       <head>
         <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+        <link rel="stylesheet" type="text/css" href="/styles.css">
       	${helmet.title.toString()}
 	      ${helmet.meta.toString()}
 	      ${helmet.link.toString()}
