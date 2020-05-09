@@ -21,4 +21,4 @@ COPY . .
 RUN npm install
 
 # Run the command on container startup
-CMD  printenv | sed 's/^\(.*\)$/export \1/g' > /usr/project_env.sh && npm run prod && echo "yeap" && cron && tail -f /var/log/cron.log
+CMD  printenv | sed 's/^\(.*\)$/export \1/g' > /usr/project_env.sh && npm run prod && cron && tail -f /var/log/cron.log

@@ -20,7 +20,6 @@ services:
       - ${APP_BACKEND_PORT}
     environment:
       - MONGODB_URI=mongodb://${MONGO_USERNAME}:${MONGO_PASSWORD}@mongo:${MONGO_PORT}/scraper?authSource=admin
-      # - MONGODB_URI=mongodb://root:greg92@ds127624.mlab.com:27624/scraper?authSource=admin
       - PORT=${APP_BACKEND_PORT}
       - NODE_ENV=production
     restart: always

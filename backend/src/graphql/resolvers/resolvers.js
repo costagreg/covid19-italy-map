@@ -14,9 +14,6 @@ export default (UpdateRegion) => ({
         .sort({ date: -1 })
         .limit(days)
 
-      // TO-DO check for param
-      // TO-DO refactor
-
       const response = latest.reduce(
         (acc, update) => {
           acc.x.unshift(update['date'])
