@@ -19,7 +19,6 @@ const Dashboard = () => {
         const { latestUpdates } = data
         const { date, regions } = latestUpdates
 
-        if (regions.length === 0) return <div>Ops something went wrong</div>
         const selectedRegionData = regions.find(
           (update) => update.region === selectedRegion
         )
