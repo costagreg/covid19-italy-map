@@ -5,11 +5,6 @@ import typeDefs from './graphql/typeDefs'
 import resolvers from './graphql/resolvers'
 
 const port = process.env.PORT
-// const corsOptions = {
-//   origin: 'http://localhost:8080',
-//   credentials: true,
-// }
-
 const app = express()
 
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true })

@@ -3,6 +3,7 @@ import { Query } from 'react-apollo'
 import Loader from '../../components/Loader'
 import { FETCH_LATEST_UPDATES } from '../../queries'
 import DashboardView from '../../components/DashboardView'
+import { today } from '../../utils'
 
 const Dashboard = () => {
   const defaultRegion = 'Sicilia'
@@ -10,7 +11,7 @@ const Dashboard = () => {
   const [selectedParam, selectParam] = useState('totalCases')
 
   return (
-    <Query query={FETCH_LATEST_UPDATES}>
+    <Query query={FETCH_LATEST_UPDATES} variables={{ date: today() }}>
       {({ loading, error, data }) => {
         if (loading) return <Loader />
         if (error) return <div>Ops something went wrong</div>
@@ -18,6 +19,7 @@ const Dashboard = () => {
         const { latestUpdates } = data
         const { date, regions } = latestUpdates
 
+        if (regions.length === 0) return <div>Ops something went wrong</div>
         const selectedRegionData = regions.find(
           (update) => update.region === selectedRegion
         )

@@ -5,11 +5,12 @@ import propTypes from 'prop-types'
 import Loader from '../../components/Loader'
 import LineChart from '../../components/LineChart'
 import { FETCH_LATEST_TREND } from '../../queries'
+import { today } from '../../utils'
 
 const ChartTrending = ({ selectedRegion, selectedParam }) => (
   <Query
     query={FETCH_LATEST_TREND}
-    variables={{ region: selectedRegion, param: selectedParam }}
+    variables={{ date: today(), region: selectedRegion, param: selectedParam }}
   >
     {({ loading, error, data }) => {
       if (loading) return <Loader />

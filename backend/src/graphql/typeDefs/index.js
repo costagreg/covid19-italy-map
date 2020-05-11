@@ -2,16 +2,18 @@ import { gql } from 'apollo-server-express'
 
 export default gql`
    type Query {
-      latestUpdates: latestUpdates,
-      latestTrendParam(param: String!, region: String!, days: Int!) : xy,
+      latestUpdates(date: String!): latestUpdates,
+      latestTrendParam(date: String!, param: String!, region: String!, days: Int!) : xy,
    }
 
    type latestUpdates {
+      id: ID!, 
       date: String!,
       regions: [updateRegion!]
    }
 
    type xy {
+      id: ID!,
       x: [String!],
       y: [Int!],
    }
