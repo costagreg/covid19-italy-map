@@ -422,8 +422,90 @@ exports[`Dashboard View @render renders the Dashboard without any error 1`] = `
       <section
         class="dashboardView__chartTrending"
       >
-        <div>
-          Ops something went wrong
+        <div
+          data-testid="chartTrending-Sicilia"
+        >
+          <div
+            class="lineChart"
+          >
+            <svg
+              height="200"
+              viewBox="0 0 400 200"
+              width="400"
+            >
+              <g>
+                <line
+                  class="lineChart__xAxis"
+                  x1="20"
+                  x2="380"
+                  y1="170"
+                  y2="170"
+                />
+              </g>
+              <g>
+                <path
+                  class="lineChart__line"
+                  d="M20,90L380,10"
+                />
+                <g
+                  transform="translate(20,90)"
+                >
+                  <circle
+                    class="lineChart__circle"
+                    r="2"
+                  />
+                  <circle
+                    data-testid="dataPoint"
+                    fill="transparent"
+                    r="10"
+                  />
+                </g>
+                <g
+                  transform="translate(380,10)"
+                >
+                  <circle
+                    class="lineChart__circle"
+                    r="2"
+                  />
+                  <circle
+                    data-testid="dataPoint"
+                    fill="transparent"
+                    r="10"
+                  />
+                </g>
+              </g>
+              <g
+                transform="translate(20,170)"
+              >
+                <text
+                  class="lineChart__xTicksText"
+                >
+                  01/01
+                </text>
+                <line
+                  class="lineChart__xTicksLine"
+                  x1="0"
+                  y1="0"
+                  y2="5"
+                />
+              </g>
+              <g
+                transform="translate(380,170)"
+              >
+                <text
+                  class="lineChart__xTicksText"
+                >
+                  01/01
+                </text>
+                <line
+                  class="lineChart__xTicksLine"
+                  x1="0"
+                  y1="0"
+                  y2="5"
+                />
+              </g>
+            </svg>
+          </div>
         </div>
       </section>
     </section>

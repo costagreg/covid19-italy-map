@@ -113,14 +113,18 @@ const mocks = [
 
 describe('Dashboard', () => {
   describe('@render', () => {
-    it('renders the Dashboard without any error', async () => {
-      const { asFragment } = render(
+    it.only('renders the Dashboard without any error', async () => {
+      const { asFragment, queryByText, debug } = render(
         <MockedProvider mocks={mocks}>
           <Dashboard />
         </MockedProvider>
       )
 
       await act(() => wait(1000))
+
+      debug()
+
+      expect(queryByText('Ops something went wrong')).toBeNull()
 
       expect(asFragment()).toMatchSnapshot()
     })

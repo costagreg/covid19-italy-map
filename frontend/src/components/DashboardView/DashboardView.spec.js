@@ -4,11 +4,7 @@ import wait from 'waait'
 import { MockedProvider } from '@apollo/react-testing'
 import { render, act, fireEvent } from '@testing-library/react'
 import { FETCH_LATEST_TREND } from '../../queries'
-// jest
-// .spyOn(React, 'useRef')
-// .mockReturnValue({
-//   current: { offsetWidth: 500, offsetHeight: 400 },
-// })
+import { today } from '../../utils'
 
 const regions = [
   {
@@ -63,7 +59,7 @@ const mocks = [
   {
     request: {
       query: FETCH_LATEST_TREND,
-      variables: { region: 'Sicilia', param: 'totalCases' },
+      variables: { date: today(), region: 'Sicilia', param: 'totalCases' },
     },
     result: {
       data: {
@@ -76,14 +72,15 @@ const mocks = [
 describe('Dashboard View', () => {
   describe('@render', () => {
     it('renders the Dashboard without any error', async () => {
-      const { asFragment } = render(
+      const { asFragment, queryByText } = render(
         <MockedProvider mocks={mocks}>
           <DashboardView {...props} />
         </MockedProvider>
       )
 
-      await act(() => wait(0))
+      await act(() => wait(1000))
 
+      expect(queryByText('Ops something went wrong')).toBeNull()
       expect(asFragment()).toMatchSnapshot()
     })
   })
