@@ -4,6 +4,7 @@ import { MockedProvider } from '@apollo/react-testing'
 import wait from 'waait'
 import Dashboard from './Dashboard'
 import { FETCH_LATEST_UPDATES, FETCH_LATEST_TREND } from '../../queries'
+import { today } from '../../utils'
 import { act } from 'react-dom/test-utils'
 
 const allRegions = [
@@ -82,7 +83,7 @@ const mocks = [
   {
     request: {
       query: FETCH_LATEST_TREND,
-      variables: { region: 'Sicilia', param: 'totalCases' },
+      variables: { date: today(), region: 'Sicilia', param: 'totalCases' },
     },
     result: {
       data: {
@@ -93,7 +94,7 @@ const mocks = [
   {
     request: {
       query: FETCH_LATEST_TREND,
-      variables: { region: 'Basilicata', param: 'totalCases' },
+      variables: { date: today(), region: 'Basilicata', param: 'totalCases' },
     },
     result: {
       data: {
@@ -104,7 +105,7 @@ const mocks = [
   {
     request: {
       query: FETCH_LATEST_UPDATES,
-      variables: {},
+      variables: { date: today()},
     },
     result: { data: { latestUpdates } },
   },
@@ -119,7 +120,7 @@ describe('Dashboard', () => {
         </MockedProvider>
       )
 
-      await act(() => wait(10))
+      await act(() => wait(1000))
 
       expect(asFragment()).toMatchSnapshot()
     })
@@ -156,7 +157,7 @@ describe('Dashboard', () => {
         <MockedProvider mocks={[{
           request: {
             query: FETCH_LATEST_UPDATES,
-            variables: {},
+            variables: { date: today()},
           },
           error: new Error("Something wrong!")
         }]}>

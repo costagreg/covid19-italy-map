@@ -4,7 +4,7 @@ import { MockedProvider } from '@apollo/react-testing'
 import wait from 'waait'
 import ChartTrending from './ChartTrending'
 import { FETCH_LATEST_TREND } from '../../queries'
-
+import { today } from '../../utils'
 const latestTrendParamSicilia = {
   x: [1, 2],
   y: [10, 20],
@@ -15,7 +15,7 @@ const mocks = [
   {
     request: {
       query: FETCH_LATEST_TREND,
-      variables: { region: 'Sicilia', param: 'totalCases' },
+      variables: { date: today(), region: 'Sicilia', param: 'totalCases' },
     },
     result: {
       data: {
@@ -46,7 +46,7 @@ describe('ChartTrending', () => {
             {
               request: {
                 query: FETCH_LATEST_TREND,
-                variables: {},
+                variables: { date: today()},
               },
               error: new Error('Something wrong!'),
             },

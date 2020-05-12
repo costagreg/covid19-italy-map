@@ -2,6 +2,10 @@ import { render, fireEvent } from '@testing-library/react'
 import React from 'react'
 import LineChart, { ToolTip } from './LineChart'
 
+jest.mock('../../constants', () => ({
+  params: { labelMock: 'label' },
+}))
+
 describe('LineChart', () => {
   const initProps = {
     xAxis: [1586448000000, 1586534400000, 1586620800000],
@@ -22,43 +26,45 @@ describe('LineChart', () => {
 
   describe('@events', () => {
     it('shows the tooltip when user hover mouse over to a data point', () => {
-      const { getAllByTestId, getByText, queryByText } = render(
+      const { getAllByTestId, debug, queryByText } = render(
         <LineChart {...initProps} />
       )
 
       const datePoints = getAllByTestId('dataPoint')
 
-      expect(queryByText(initProps.yLabel)).toBeNull()
+      expect(queryByText('label')).toBeNull()
       expect(queryByText(`${initProps.yAxis[0]}`)).toBeNull()
 
       fireEvent.mouseOver(datePoints[0])
 
-      expect(queryByText(initProps.yLabel)).toBeTruthy()
+      debug()
+
+      expect(queryByText('label')).toBeTruthy()
       expect(queryByText(`${initProps.yAxis[0]}`)).toBeTruthy()
       expect(queryByText(`${initProps.yAxis[1]}`)).toBeNull()
       expect(queryByText(`${initProps.yAxis[2]}`)).toBeNull()
     })
 
     it('hide the tooltip when user hover mouse out to a data point', () => {
-      const { getAllByTestId, getByText, queryByText } = render(
+      const { getAllByTestId, queryByText } = render(
         <LineChart {...initProps} />
       )
 
       const datePoints = getAllByTestId('dataPoint')
 
-      expect(queryByText(initProps.yLabel)).toBeNull()
+      expect(queryByText('label')).toBeNull()
       expect(queryByText(`${initProps.yAxis[2]}`)).toBeNull()
 
       fireEvent.mouseOver(datePoints[2])
 
-      expect(queryByText(initProps.yLabel)).toBeTruthy()
+      expect(queryByText('label')).toBeTruthy()
       expect(queryByText(`${initProps.yAxis[0]}`)).toBeNull()
       expect(queryByText(`${initProps.yAxis[1]}`)).toBeNull()
       expect(queryByText(`${initProps.yAxis[2]}`)).toBeTruthy()
 
       fireEvent.mouseOut(datePoints[2])
 
-      expect(queryByText(initProps.yLabel)).toBeNull()
+      expect(queryByText('label')).toBeNull()
       expect(queryByText(`${initProps.yAxis[2]}`)).toBeNull()
     })
   })
@@ -116,7 +122,6 @@ describe('ToolTip', () => {
       const { getByTestId } = render(<ToolTip {...props} />)
 
       isToolTipNotCropped(getByTestId('toolTip'), props)
-
     })
 
     it('does not crop the tooltip if datapoint is close to right bottom edge', () => {

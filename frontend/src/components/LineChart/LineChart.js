@@ -7,7 +7,7 @@ import { max, min } from 'd3-array'
 import { line, curveCatmullRom } from 'd3-shape'
 import { format } from 'date-fns'
 
-import { params } from '../../constants/index'
+import { params } from '../../constants'
 
 import './LineChart.scss'
 
