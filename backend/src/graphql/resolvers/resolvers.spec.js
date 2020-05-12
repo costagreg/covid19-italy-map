@@ -4,15 +4,14 @@ const UpdateRegion = (data) => {
   const find = jest.fn(() => ({
     sort,
   }))
-  const sort = jest.fn(() => ({
-    limit,
-  }))
-  const limit = jest.fn(() => data)
+
+  const sort = jest.fn(() => data)
+
   const UpdateRegion = {
     find,
   }
 
-  return [UpdateRegion, find, sort, limit]
+  return [UpdateRegion, find, sort]
 }
 
 const regions = [
@@ -33,16 +32,24 @@ const regions = [
 describe('Resolvers', () => {
   describe('latestUpdates', () => {
     it('returns the latest update for all regions', async () => {
-      const [mockUpdateRegion, mockFind, mockSort, mockLimit] = UpdateRegion(
-        regions
+      const [mockUpdateRegion, mockFind, mockSort] = UpdateRegion(regions)
+      const result = await resolvers(mockUpdateRegion).Query.latestUpdates(
+        {},
+        { date: '03/06/1992' }
       )
-      const result = await resolvers(mockUpdateRegion).Query.latestUpdates()
 
-      expect(mockFind).toHaveBeenCalledWith()
+      expect(mockFind).toHaveBeenCalledWith({
+        date: {
+          $gte: new Date('1992-03-06T00:00:00.000Z'),
+          $lt: new Date('1992-03-07T00:00:00.000Z'),
+        },
+      })
+
       expect(mockSort).toHaveBeenCalledWith({ date: -1 })
-      expect(mockLimit).toHaveBeenCalledWith(21)
+
       expect(result).toEqual({
-        date: 'mockDate',
+        id: 699840000000,
+        date: 699840000000,
         regions,
       })
     })
@@ -50,7 +57,7 @@ describe('Resolvers', () => {
 
   describe('latestTrendParam', () => {
     it('returns the latest trend data a specific parameter', async () => {
-      const [mockUpdateRegion, mockFind, mockSort, mockLimit] = UpdateRegion([
+      const [mockUpdateRegion, mockFind, mockSort] = UpdateRegion([
         {
           name: 'region1',
           param1: 10,
@@ -69,13 +76,20 @@ describe('Resolvers', () => {
       ])
       const result = await resolvers(mockUpdateRegion).Query.latestTrendParam(
         {},
-        { region: 'region1', param: 'param1', days: 10 }
+        { date: '03/06/1992', region: 'region1', param: 'param1', days: 10 }
       )
 
-      expect(mockFind).toHaveBeenCalledWith({ region: 'region1' })
+      expect(mockFind).toHaveBeenCalledWith({
+        date: {
+          $gte: new Date('1992-02-25T00:00:00.000Z'),
+          $lt: new Date('1992-03-07T00:00:00.000Z'),
+        },
+        region: 'region1',
+      })
+
       expect(mockSort).toHaveBeenCalledWith({ date: -1 })
-      expect(mockLimit).toHaveBeenCalledWith(10)
       expect(result).toEqual({
+        id: 699840000000,
         x: ['date3', 'date2', 'date1'],
         y: [116, 110, 10],
       })

@@ -7,7 +7,7 @@ export default (UpdateRegion) => ({
 
       const latest = await UpdateRegion.find({
         date: { $gte: today, $lt: tomorrow(today) },
-      })
+      }).sort({ date: -1 })
 
       return {
         id: today.getTime(),
