@@ -19,20 +19,23 @@ export default function serverRenderer() {
       link: createHttpLink({
         credentials: 'include',
         fetch,
-        uri: process.env.GRAPHQL_URL
-      })
+        uri: process.env.GRAPHQL_URL,
+      }),
     })
 
-    const app = ReactDOMServer.renderToString(
+    const myApp = (
       <ApolloProvider client={client}>
         <App />
       </ApolloProvider>
     )
+    
+    await getDataFromTree(myApp)
 
-    await getDataFromTree(App)
+    const html = ReactDOMServer.renderToString(myApp)
+
     const helmet = Helmet.renderStatic()
     const preloadedState = { store: client.extract() }
 
-    return res.send(template(app, helmet, preloadedState))
+    return res.send(template(html, helmet, preloadedState))
   }
 }
