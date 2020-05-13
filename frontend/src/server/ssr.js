@@ -11,18 +11,18 @@ import App from '../App'
 
 import template from './template.js'
 
-const client = new ApolloClient({
-  ssrMode: true,
-  cache: new InMemoryCache(),
-  link: createHttpLink({
-    credentials: 'include',
-    fetch,
-    uri: process.env.GRAPHQL_URL
-  })
-})
-
 export default function serverRenderer() {
-  return async (req, res) => {
+  return async (_, res) => {
+    const client = new ApolloClient({
+      ssrMode: true,
+      cache: new InMemoryCache(),
+      link: createHttpLink({
+        credentials: 'include',
+        fetch,
+        uri: process.env.GRAPHQL_URL
+      })
+    })
+
     const app = ReactDOMServer.renderToString(
       <ApolloProvider client={client}>
         <App />
