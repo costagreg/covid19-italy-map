@@ -12,14 +12,14 @@ const scraper = async () => {
 
   if (response.ok) {
     const responseText = await response.text()
-    const cod19Data = await mapCsvToDb(responseText)
+    const covid19Data = await mapCsvToDb(responseText)
 
     try {
       await UpdateRegionModel.collection.drop()
     } catch (e) {
       console.warn('Collection doesn\'t exist')
     }
-    await UpdateRegionModel.insertMany(cod19Data)
+    await UpdateRegionModel.insertMany(covid19Data)
   } else {
     console.error('HTTP-Error: ' + response.status)
   }

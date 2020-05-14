@@ -11,28 +11,31 @@ import App from '../App'
 
 import template from './template.js'
 
-const client = new ApolloClient({
-  ssrMode: true,
-  cache: new InMemoryCache(),
-  link: createHttpLink({
-    credentials: 'include',
-    fetch,
-    uri: process.env.GRAPHQL_URL
-  })
-})
-
 export default function serverRenderer() {
-  return async (req, res) => {
-    const app = ReactDOMServer.renderToString(
+  return async (_, res) => {
+    const client = new ApolloClient({
+      ssrMode: true,
+      cache: new InMemoryCache(),
+      link: createHttpLink({
+        credentials: 'include',
+        fetch,
+        uri: process.env.GRAPHQL_URL,
+      }),
+    })
+
+    const myApp = (
       <ApolloProvider client={client}>
         <App />
       </ApolloProvider>
     )
+    
+    await getDataFromTree(myApp)
 
-    await getDataFromTree(App)
+    const html = ReactDOMServer.renderToString(myApp)
+
     const helmet = Helmet.renderStatic()
     const preloadedState = { store: client.extract() }
 
-    return res.send(template(app, helmet, preloadedState))
+    return res.send(template(html, helmet, preloadedState))
   }
 }

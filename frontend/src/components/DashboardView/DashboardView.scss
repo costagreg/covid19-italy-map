@@ -1,6 +1,7 @@
 .dashboardView {
   display: flex;
-
+  height: 100vh;
+  
   &__italyMap {
     flex: 50%;
   }
