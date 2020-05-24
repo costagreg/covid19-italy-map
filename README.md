@@ -10,3 +10,8 @@ Demo: https://covid19.ilovecoding.dev/
 
 
 [![ezgif.com-video-to-gif-1172826c9e0e59a92.gif](https://s4.gifyu.com/images/ezgif.com-video-to-gif-1172826c9e0e59a92.gif)](https://covid19.ilovecoding.dev/)
+
+### Improvements:
+- [ ] Add mongodb indexes to improve performance.
+- [ ] Don't drop the mongodb table every time you scrap the data.
+- [ ] Use React Router and add meta tags for SEO.
